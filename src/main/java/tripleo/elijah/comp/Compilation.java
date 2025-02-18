@@ -8,6 +8,7 @@ import tripleo.elijah.lang.OS_Package;
 import tripleo.elijah.lang.Qualident;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputTree;
 import tripleo.elijah.nextgen.query.Operation2;
+import tripleo.elijah.stages.deduce.FunctionMapHook;
 import tripleo.elijah.stages.deduce.fluffy.i.FluffyComp;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.testing.comp.IFunctionMapHook;
@@ -98,6 +99,8 @@ public interface Compilation {
 
 	interface MoveMe {
 		void writeLogs(boolean aSilent, List<ElLog> aElLogs);
+
+		void addFunctionMapHook(FunctionMapHook aMain);
 	}
 
 	interface RpProcessModel {

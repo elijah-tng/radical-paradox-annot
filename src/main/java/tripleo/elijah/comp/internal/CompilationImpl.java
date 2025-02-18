@@ -105,6 +105,11 @@ public class CompilationImpl implements Compilation {
 								}
 						}
 					}
+
+					@Override
+					public void addFunctionMapHook(final FunctionMapHook aAddFunctionMapHook) {
+						_c.getDeducePhase().addFunctionMapHook(aAddFunctionMapHook);
+					}
 				};
 	}
 
