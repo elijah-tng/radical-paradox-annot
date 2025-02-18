@@ -80,7 +80,7 @@ public class DeduceTypes2 {
 		this.module  = module;
 		this.phase   = phase;
 		this.errSink = module.getCompilation().getErrSink();
-		this.LOG     = new ElLog(module.getFileName(), verbosity, PHASE);
+		this.LOG     = new GenerateFunctions.ElLog2(module.getFileName(), verbosity, PHASE);
 		//
 		phase.addLog(LOG);
 	}

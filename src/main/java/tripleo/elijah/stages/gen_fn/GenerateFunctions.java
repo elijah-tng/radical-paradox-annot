@@ -1812,19 +1812,9 @@ import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.DeduceConstructStatement;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
-import tripleo.elijah.stages.instructions.ConstTableIA;
-import tripleo.elijah.stages.instructions.FnCallArgs;
-import tripleo.elijah.stages.instructions.IdentIA;
-import tripleo.elijah.stages.instructions.Instruction;
-import tripleo.elijah.stages.instructions.InstructionArgument;
-import tripleo.elijah.stages.instructions.InstructionName;
-import tripleo.elijah.stages.instructions.IntegerIA;
-import tripleo.elijah.stages.instructions.Label;
-import tripleo.elijah.stages.instructions.LabelIA;
-import tripleo.elijah.stages.instructions.ProcIA;
-import tripleo.elijah.stages.instructions.SymbolIA;
-import tripleo.elijah.stages.instructions.VariableTableType;
+import tripleo.elijah.stages.instructions.*;
 import tripleo.elijah.stages.logging.ElLog;
+import tripleo.elijah.stages.logging.LogEntry;
 import tripleo.elijah.stages.stage1.S1_Constructor;
 import tripleo.elijah.util.Helpers;
 import tripleo.elijah.util.NotImplementedException;
@@ -1850,8 +1840,9 @@ public class GenerateFunctions {
 	public GenerateFunctions(final GeneratePhase aPhase, final OS_Module aModule, final PipelineLogic aPipelineLogic) {
 		phase  = aPhase;
 		module = aModule;
-		LOG    = new ElLog(module.getFileName(), aPhase.getVerbosity(), PHASE);
-		//
+
+		LOG = new ElLog2(aPhase);
+
 		aPipelineLogic.addLog(LOG);
 	}
 
@@ -3458,6 +3449,34 @@ public class GenerateFunctions {
 		return i;
 	}
 
+	/**
+	 * We want Markers (Marker is prob a name confusion -- there is also IProblem)
+	 */
+	public static class ElLog2 extends ElLog {
+		public ElLog2(final String aModFileName, final Verbosity aVerbosity, final String aPhase) {
+			super(aModFileName, aVerbosity, aPhase);
+		}
+
+		/**
+		 * This is where we System.err/out.print from
+		 */
+		@Override
+		public void behaviorErr(final Verbosity aVerbosity, final LogEntry aLogEntry, final long aTime, final String aMessage) {
+			if (aVerbosity == Verbosity.VERBOSE) {
+				System.err.println("MK_MARKER "+aMessage);
+			}
+		}
+
+		/**
+		 * This is where we System.err/out.print from
+		 */
+		@Override
+		public void behaviorInfo(final Verbosity aVerbosity, final LogEntry aLogEntry, final long aTime, final String aMessage) {
+			if (aVerbosity == Verbosity.VERBOSE) {
+				System.out.println("MK_MARKER "+aMessage);
+			}
+		}
+	}
 }
 
 //
