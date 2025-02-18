@@ -59,15 +59,6 @@ public interface Compilation {
 
 	FluffyComp getFluffy();
 
-	static boolean isGitlab_ci() {
-		return System.getenv("GITLAB_CI") != null;
-	}
-
-	static ElLog.Verbosity gitlabCIVerbosity() {
-		final boolean gitlab_ci = isGitlab_ci();
-		return gitlab_ci ? ElLog.Verbosity.SILENT : ElLog.Verbosity.VERBOSE;
-	}
-
 	Operation2<OS_Module> findPrelude(String aPrelude);
 
 	List<ElLog> getElLogs();
