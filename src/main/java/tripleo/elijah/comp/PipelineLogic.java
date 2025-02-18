@@ -8,19 +8,21 @@
  */
 package tripleo.elijah.comp;
 
-import org.jetbrains.annotations.*;
-import tripleo.elijah.entrypoints.*;
-import tripleo.elijah.lang.*;
-import tripleo.elijah.nextgen.inputtree.*;
-import tripleo.elijah.stages.deduce.*;
+import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.entrypoints.EntryPoint;
+import tripleo.elijah.lang.OS_Module;
+import tripleo.elijah.nextgen.inputtree.EIT_ModuleList;
+import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.gen_fn.*;
-import tripleo.elijah.stages.gen_generic.*;
-import tripleo.elijah.stages.logging.*;
+import tripleo.elijah.stages.gen_generic.GenerateResult;
+import tripleo.elijah.stages.gen_generic.GenerateResultItem;
+import tripleo.elijah.stages.logging.ElLog;
 
-import java.io.*;
-import java.util.*;
-import java.util.function.*;
-import java.util.stream.*;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created 12/30/20 2:14 AM
@@ -101,7 +103,7 @@ public class PipelineLogic implements AccessBus.AB_ModuleListListener {
 		resolveMods();
 
 		final List<PL_Run2> run2_work = mods.stream()
-				.map(mod -> new PL_Run2(mod, mod.entryPoints._getMods(), this::getGenerateFunctions, dp, this))
+				.map(mod -> new PL_Run2(mod, mod.getEntryPoints()._getMods(), this::getGenerateFunctions, dp, this))
 				.collect(Collectors.toList());
 
 		final List<DeducePhase.GeneratedClasses> lgc2 = run2_work.stream()

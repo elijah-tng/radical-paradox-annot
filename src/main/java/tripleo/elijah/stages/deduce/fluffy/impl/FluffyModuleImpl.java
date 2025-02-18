@@ -72,9 +72,9 @@ public class FluffyModuleImpl implements FluffyModule {
 		//
 		// FIND ALL ENTRY POINTS (should only be one per module)
 		//
-		final Consumer<ClassStatement> ccs = (x) -> module.entryPoints.add(new MainClassEntryPoint(x));
+		final Consumer<ClassStatement> ccs = (x) -> module.getEntryPoints().add(new MainClassEntryPoint(x));
 
-		module.items.stream()
+		module.getItems().stream()
 				.filter(item -> item instanceof ClassStatement)
 				.filter(classStatement -> MainClassEntryPoint.isMainClass((ClassStatement) classStatement))
 				.forEach(classStatement -> faep_002((ClassStatement) classStatement, ccs));
