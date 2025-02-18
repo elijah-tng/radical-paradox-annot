@@ -30,7 +30,7 @@ public class DeduceTypesTest {
 	@Before
 	public void setUp() throws ResolveError {
 		final OS_Module mod = new OS_Module();
-		mod.setParent(new Compilation(new StdErrSink(), new IO()));
+		mod.setParent(tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO()));
 		final ModuleContext mctx = new ModuleContext(mod);
 		mod.setContext(mctx);
 		final ClassStatement cs = new ClassStatement(mod, mctx);
@@ -55,12 +55,12 @@ public class DeduceTypesTest {
 		final IdentExpression x1 = Helpers.string_to_ident("x");
 		x1.setContext(fc);
 		//
-		mod.setPrelude(mod.getParent().findPrelude("c").success());
+		mod.setPrelude(mod.getCompilation().findPrelude("c").success());
 		//
 		//
 		//
-		final ElLog.Verbosity verbosity     = mod.getParent().gitlabCIVerbosity();
-		final AccessBus       ab            = new AccessBus(mod.getParent());
+		final ElLog.Verbosity verbosity     = Compilation.gitlabCIVerbosity();
+		final AccessBus       ab            = new AccessBus(mod.getCompilation());
 		final PipelineLogic   pl            = new PipelineLogic(ab);
 		final GeneratePhase   generatePhase = new GeneratePhase(verbosity, pl);
 		final DeducePhase     dp            = new DeducePhase(generatePhase, pl, verbosity);

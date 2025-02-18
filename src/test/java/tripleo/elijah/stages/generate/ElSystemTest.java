@@ -25,7 +25,7 @@ public class ElSystemTest {
 
 	@Before
 	public void setUp() throws Exception {
-		c  = new Compilation(new StdErrSink(), new IO());
+		c  = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 		ab = new AccessBus(c);
 
 		final String f = "test/basic1/backlink3";

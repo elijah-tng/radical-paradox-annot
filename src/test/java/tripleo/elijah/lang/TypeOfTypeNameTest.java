@@ -31,7 +31,7 @@ public class TypeOfTypeNameTest {
 		//
 		final Context     ctx = mock(Context.class);
 		final OS_Module       mod = mock(OS_Module.class);
-		final Compilation c   = new Compilation(new StdErrSink(), new IO());
+		final Compilation c   = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 
 		//
 		// CREATE VARIABLES
@@ -84,7 +84,7 @@ public class TypeOfTypeNameTest {
 		//
 		final Context     ctx = mock(Context.class);
 		final OS_Module       mod = mock(OS_Module.class);
-		final Compilation c   = new Compilation(new StdErrSink(), new IO());
+		final Compilation c   = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 
 		//
 		// CREATE VARIABLES
@@ -210,7 +210,7 @@ public class TypeOfTypeNameTest {
 		final String typeNameString = "SystemInteger";
 
 		final OS_Module mod = new OS_Module();
-		mod.setParent(new Compilation(new StdErrSink(), new IO()));
+		mod.setParent(tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO()));
 		final Context mod_ctx = mod.getContext();
 
 		final ClassStatement st_af = new ClassStatement(mod, mod_ctx);
@@ -257,7 +257,7 @@ public class TypeOfTypeNameTest {
 
 //		OS_Module mod = mock(OS_Module.class);
 		final ElLog.Verbosity verbosity1    = Compilation.gitlabCIVerbosity();
-		final AccessBus       ab            = new AccessBus(mod.getParent());
+		final AccessBus       ab            = new AccessBus(mod.getCompilation());
 		final PipelineLogic   pl            = new PipelineLogic(ab);
 		final GeneratePhase   generatePhase = new GeneratePhase(verbosity1, pl);
 		final DeduceTypes2    deduceTypes2  = new DeduceTypes2(mod, new DeducePhase(generatePhase, pl, verbosity1));

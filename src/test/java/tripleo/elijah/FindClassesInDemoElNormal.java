@@ -30,7 +30,7 @@ public class FindClassesInDemoElNormal {
 	public final void testParseFile() throws Exception {
 		final List<String> args = tripleo.elijah.util.Helpers.List_of("test/demo-el-normal", "test/demo-el-normal/main2", "-sE");
 		final ErrSink      eee  = new StdErrSink();
-		final Compilation  c    = new Compilation(eee, new IO());
+		final Compilation  c    = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(eee, new IO());
 
 		c.feedCmdLine(args);
 
@@ -46,7 +46,7 @@ public class FindClassesInDemoElNormal {
 	public final void testListFolders() throws Exception {
 		final List<String> args = Helpers.List_of("test/demo-el-normal/listfolders/", "-sE");
 		final ErrSink      eee  = new StdErrSink();
-		final Compilation  c    = new Compilation(eee, new IO());
+		final Compilation  c    = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(eee, new IO());
 
 		c.feedCmdLine(args);
 

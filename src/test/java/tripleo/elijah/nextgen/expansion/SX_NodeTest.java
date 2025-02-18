@@ -18,7 +18,7 @@ public class SX_NodeTest extends TestCase {
 	public void testFullText() {
 		final StdErrSink      errSink       = new StdErrSink();
 		final IO              io            = new IO();
-		final Compilation comp          = new Compilation(errSink, io);
+		final Compilation comp          = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(errSink, io);
 		final AccessBus       ab            = new AccessBus(comp);
 		final PipelineLogic   pipelineLogic = new PipelineLogic(ab);
 		final OS_Module mod = comp.moduleBuilder()
