@@ -12,17 +12,19 @@ import org.jdeferred2.DoneCallback;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.lang.NamespaceStatement;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.NamespaceInvocation;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.elijah.work.WorkJob;
 import tripleo.elijah.work.WorkManager;
+import tripleo.elijah_fluffy.util.Eventual;
 
 /**
  * Created 5/31/21 3:01 AM
  */
-public class WlGenerateNamespace implements WorkJob {
+public class WlGenerateNamespace extends _WlGenerator<GeneratedNamespace> implements WorkJob, WlGenerator<GeneratedNamespace> {
 	private final GenerateFunctions generateFunctions;
 	private final NamespaceStatement namespaceStatement;
 	private final NamespaceInvocation namespaceInvocation;
@@ -45,7 +47,7 @@ public class WlGenerateNamespace implements WorkJob {
 		switch (resolvePromise.state()) {
 		case PENDING:
 			@NotNull final GeneratedNamespace ns = generateFunctions.generateNamespace(namespaceStatement);
-			ns.setCode(generateFunctions.module.parent.nextClassCode());
+			ns.setCode(getCodable().nextClassCode());
 			if (coll != null)
 				coll.add(ns);
 
@@ -65,6 +67,16 @@ public class WlGenerateNamespace implements WorkJob {
 		}
 		_isDone = true;
 //		System.out.println(String.format("** GenerateNamespace %s at %s", namespaceInvocation.getNamespace().getName(), this));
+	}
+
+	@Override
+	public Compilation.Codeable getCodable() {
+		return generateFunctions.module.getCompilation().codable();
+	}
+
+	@Override
+	public Eventual<GeneratedNamespace> generated() {
+		return null;
 	}
 
 	@Override

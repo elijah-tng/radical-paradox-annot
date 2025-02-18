@@ -92,6 +92,18 @@ public interface Compilation {
 	@Deprecated
 	void testMapHooks(List<IFunctionMapHook> aMapHooks);
 
+	RpProcessModel processModel();
+
+	MoveMe moveMe();
+
+	interface MoveMe {
+		void writeLogs(boolean aSilent, List<ElLog> aElLogs);
+	}
+
+	interface RpProcessModel {
+		Pipeline getPipelines();
+	}
+
 	interface World {
 		boolean isPackage(String aString);
 

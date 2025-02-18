@@ -11,6 +11,7 @@ package tripleo.elijah.stages.gen_fn;
 import org.jdeferred2.DoneCallback;
 import org.jdeferred2.impl.DeferredObject;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.lang.ClassStatement;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.DeducePhase;
@@ -22,7 +23,7 @@ import tripleo.elijah.work.WorkManager;
 /**
  * Created 5/16/21 12:41 AM
  */
-public class WlGenerateClass implements WorkJob {
+public class WlGenerateClass extends _WlGenerator<GeneratedClass> implements WorkJob {
 	private final ClassStatement classStatement;
 	private final GenerateFunctions generateFunctions;
 	private final ClassInvocation classInvocation;
@@ -45,7 +46,7 @@ public class WlGenerateClass implements WorkJob {
 		switch (resolvePromise.state()) {
 		case PENDING:
 			@NotNull final GeneratedClass kl = generateFunctions.generateClass(classStatement, classInvocation);
-			kl.setCode(generateFunctions.module.parent.nextClassCode());
+			kl.setCode(generateFunctions.module.getCompilation().codable().nextClassCode());
 			if (coll != null)
 				coll.add(kl);
 
@@ -76,6 +77,11 @@ public class WlGenerateClass implements WorkJob {
 
 	public GeneratedClass getResult() {
 		return Result;
+	}
+
+	@Override
+	public Compilation.Codeable getCodable() {
+		return generateFunctions.module.getCompilation().codable();
 	}
 }
 

@@ -227,7 +227,7 @@ public class GeneratedClass extends GeneratedContainerNC implements GNCoded {
 					if (potentialTypes.size() == 2) {
 						final ClassStatement resolvedClass1 = potentialTypes.get(0).resolved.getClassOf();
 						final ClassStatement resolvedClass2 = potentialTypes.get(1).resolved.getClassOf();
-						final OS_Module      prelude        = resolvedClass1.getContext().module().prelude;
+						final OS_Module      prelude        = resolvedClass1.getContext().module().getPrelude();
 
 						// TODO might not work when we split up prelude
 						//  Thats why I was testing for package name before
