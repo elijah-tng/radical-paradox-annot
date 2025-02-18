@@ -1,13 +1,13 @@
 package tripleo.elijah.comp.functionality.f203;
 
-import tripleo.elijah.comp.*;
+import tripleo.elijah.comp.Compilation;
 
-import java.io.*;
+import java.io.File;
 
 public class ChooseCompilationNameBehavior implements ChooseDirectoryNameBehavior {
-	private final CompilationImpl c;
+	private final Compilation c;
 
-	public ChooseCompilationNameBehavior(final CompilationImpl aC) {
+	public ChooseCompilationNameBehavior(final Compilation aC) {
 		c = aC;
 	}
 
