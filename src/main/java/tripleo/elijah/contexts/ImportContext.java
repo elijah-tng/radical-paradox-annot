@@ -8,10 +8,10 @@
  */
 package tripleo.elijah.contexts;
 
-import tripleo.elijah.comp.*;
+import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.lang.*;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * Created 8/15/20 7:09 PM
@@ -29,11 +29,11 @@ public class ImportContext extends Context {
 	public LookupResultList lookup(final String name, final int level, final LookupResultList Result, final List<Context> alreadySearched, final boolean one) {
 		alreadySearched.add(this);
 //		System.err.println("2002 "+importStatement.importList());
-		final CompilationImpl compilation = compilation();
+		final Compilation compilation = compilation();
 		for (final Qualident importStatementItem : carrier.parts()) {
 //			System.err.println("2005 "+importStatementItem);
-			if (compilation.isPackage(importStatementItem.toString())) {
-				final OS_Package aPackage = compilation.getPackage(importStatementItem);
+			if (compilation.world().isPackage(importStatementItem.toString())) {
+				final OS_Package aPackage = compilation.world().getPackage(importStatementItem);
 //				LogEvent.logEvent(4003 , ""+aPackage.getElements());
 				for (final OS_Element element : aPackage.getElements()) {
 //					System.err.println("4002 "+element);
@@ -60,8 +60,8 @@ public class ImportContext extends Context {
 						cl.append(x.get(i));
 					}
 					// SAME AS ABOVE, WITH ADDITIONS
-					if (compilation.isPackage(cl.toString())) {
-						final OS_Package aPackage = compilation.getPackage(cl);
+					if (compilation.world().isPackage(cl.toString())) {
+						final OS_Package aPackage = compilation.world().getPackage(cl);
 //						LogEvent.logEvent(4003 , ""+aPackage.getElements());
 						for (final OS_Element element : aPackage.getElements()) {
 //							System.err.println("4002 "+element);
