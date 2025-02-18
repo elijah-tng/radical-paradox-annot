@@ -1,0 +1,8 @@
+[*.java]
+end_of_line = lf
+tab_width = 2
+trim_trailing_whitespace = true
+indent_style = tab
+indent_size = 2
+ij_java_tab_width = 2
+ij_any_align_multiline_assignment = true
