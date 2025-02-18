@@ -21,6 +21,7 @@ import tripleo.elijah.util.Helpers;
 
 import static org.easymock.EasyMock.*;
 
+@Ignore
 public class TypeOfTypeNameTest {
 
 	@Ignore

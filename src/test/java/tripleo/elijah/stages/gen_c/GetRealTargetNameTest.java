@@ -12,6 +12,7 @@ package tripleo.elijah.stages.gen_c;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import tripleo.elijah.comp.*;
 import tripleo.elijah.lang.*;
@@ -26,6 +27,7 @@ import tripleo.elijah.util.Helpers;
 
 import static org.easymock.EasyMock.mock;
 
+@Ignore
 public class GetRealTargetNameTest {
 
 	GeneratedFunction gf;

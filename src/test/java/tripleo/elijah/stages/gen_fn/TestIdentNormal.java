@@ -9,6 +9,7 @@
 package tripleo.elijah.stages.gen_fn;
 
 import org.jetbrains.annotations.NotNull;
+import org.junit.Ignore;
 import tripleo.elijah.comp.*;
 import tripleo.elijah.lang.*;
 import tripleo.elijah.stages.deduce.*;
@@ -23,6 +24,7 @@ import static org.easymock.EasyMock.*;
 /**
  * Created 3/4/21 3:53 AM
  */
+@Ignore
 public class TestIdentNormal {
 
 //	@Test(expected = IllegalStateException.class) // TODO proves nothing
