@@ -13,12 +13,12 @@ import tripleo.elijah.comp.GenBuffer;
 import tripleo.elijah.gen.CompilerContext;
 import tripleo.elijah.gen.ModuleRef;
 import tripleo.elijah.gen.TypeRef;
-import tripleo.elijah.gen.nodes.*;
 import tripleo.elijah.lang.NumericExpression;
 import tripleo.elijah.lang2.BuiltInTypes;
 import tripleo.elijah.util.NotImplementedException;
 import tripleo.util.buffer.*;
 
+import java.lang.annotation.Inherited;
 import java.util.List;
 
 import static tripleo.elijah.util.Helpers.List_of;
@@ -56,7 +56,7 @@ public class FactorialR /* extends TestCase */ {
 		gbn.GenImportStmt(cctx, impn);
 		
 		final ClassDeclNode cdn = new ClassDeclNode("Main", null,
-				List_of(new Inherited("Arguments", false))); // gen inh code 
+				List_of(new Inherited("Arguments", false))); // gen inh code
 		cdn.GenClassDecl(cctx, gbn);
 		
 		final MethHdrNode mhn = new MethHdrNode(null, cdn.type(), "main", null, 1000);

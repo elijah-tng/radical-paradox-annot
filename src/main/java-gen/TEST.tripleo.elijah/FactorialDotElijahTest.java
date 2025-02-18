@@ -14,7 +14,6 @@ import tripleo.elijah.comp.GenBuffer;
 import tripleo.elijah.gen.CompilerContext;
 import tripleo.elijah.gen.ModuleRef;
 import tripleo.elijah.gen.TypeRef;
-import tripleo.elijah.gen.nodes.*;
 import tripleo.util.buffer.TextBuffer;
 
 import static tripleo.elijah.util.Helpers.List_of;
