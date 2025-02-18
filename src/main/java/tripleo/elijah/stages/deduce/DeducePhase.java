@@ -59,7 +59,7 @@ public class DeducePhase {
 		generatePhase = aGeneratePhase;
 		pipelineLogic = aPipelineLogic;
 		//
-		LOG = new ElLog("(DEDUCE_PHASE)", verbosity, "DeducePhase");
+		LOG = new GenerateFunctions.ElLog2("(DEDUCE_PHASE)", verbosity, "DeducePhase");
 		pipelineLogic.addLog(LOG);
 	}
 
