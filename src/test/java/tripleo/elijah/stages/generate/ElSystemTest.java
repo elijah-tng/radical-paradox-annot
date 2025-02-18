@@ -11,19 +11,21 @@ package tripleo.elijah.stages.generate;
 
 import org.junit.Before;
 import org.junit.Test;
-import tripleo.elijah.comp.*;
-import tripleo.elijah.comp.internal.CompilationImpl;
+import tripleo.elijah.comp.AccessBus;
+import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.comp.IO;
+import tripleo.elijah.comp.StdErrSink;
 import tripleo.elijah.util.Helpers;
 
 public class ElSystemTest {
 
 	ElSystem        sys;
-	CompilationImpl c;
+	Compilation c;
 	private AccessBus ab;
 
 	@Before
 	public void setUp() throws Exception {
-		c  = new CompilationImpl(new StdErrSink(), new IO());
+		c  = new Compilation(new StdErrSink(), new IO());
 		ab = new AccessBus(c);
 
 		final String f = "test/basic1/backlink3";

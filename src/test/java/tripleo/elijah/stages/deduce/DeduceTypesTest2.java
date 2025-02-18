@@ -11,7 +11,6 @@ package tripleo.elijah.stages.deduce;
 import org.junit.Assert;
 import org.junit.Test;
 import tripleo.elijah.comp.*;
-import tripleo.elijah.comp.internal.CompilationImpl;
 import tripleo.elijah.contexts.FunctionContext;
 import tripleo.elijah.contexts.ModuleContext;
 import tripleo.elijah.lang.*;
@@ -25,9 +24,9 @@ public class DeduceTypesTest2 {
 	@Test
 	public void testDeduceIdentExpression() throws ResolveError {
 		final OS_Module       mod = new OS_Module();
-		final CompilationImpl c   = new CompilationImpl(new StdErrSink(), new IO());
-		mod.parent  = c;
-		mod.prelude = mod.parent.findPrelude("c").success();
+		final Compilation c   = new Compilation(new StdErrSink(), new IO());
+		mod.setParent(c);
+		mod.setPrelude(mod.getParent().findPrelude("c").success());
 		final ModuleContext mctx = new ModuleContext(mod);
 		mod.setContext(mctx);
 		final ClassStatement cs = new ClassStatement(mod, mctx);

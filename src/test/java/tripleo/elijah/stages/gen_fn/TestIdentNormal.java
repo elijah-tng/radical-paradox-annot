@@ -10,7 +10,6 @@ package tripleo.elijah.stages.gen_fn;
 
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.comp.*;
-import tripleo.elijah.comp.internal.CompilationImpl;
 import tripleo.elijah.lang.*;
 import tripleo.elijah.stages.deduce.*;
 import tripleo.elijah.stages.instructions.IdentIA;
@@ -28,14 +27,14 @@ public class TestIdentNormal {
 
 //	@Test(expected = IllegalStateException.class) // TODO proves nothing
 	public void test() {
-		final CompilationImpl comp = new CompilationImpl(new StdErrSink(), new IO());
+		final Compilation comp = new Compilation(new StdErrSink(), new IO());
 		final OS_Module       mod  = new OS_Module();//mock(OS_Module.class);
 		mod.setParent(comp);
 		final FunctionDef fd = mock(FunctionDef.class);
 		final Context ctx1 = mock(Context.class);
 		final Context ctx2 = mock(Context.class);
 
-		final ElLog.Verbosity verbosity1 = new CompilationImpl(new StdErrSink(), new IO()).gitlabCIVerbosity();
+		final ElLog.Verbosity verbosity1 = new Compilation(new StdErrSink(), new IO()).gitlabCIVerbosity();
 		final AccessBus ab = new AccessBus(comp);
 		final PipelineLogic pl = new PipelineLogic(ab);
 		final GeneratePhase generatePhase = new GeneratePhase(verbosity1, pl);
@@ -90,13 +89,13 @@ public class TestIdentNormal {
 
 //	@Test // TODO just a mess
 	public void test2() {
-		final CompilationImpl comp = new CompilationImpl(new StdErrSink(), new IO());
+		final Compilation comp = new Compilation(new StdErrSink(), new IO());
 		final OS_Module       mod  = new OS_Module();
 		mod.setParent(comp);
 //		FunctionDef fd = mock(FunctionDef.class);
 		final Context ctx2 = mock(Context.class);
 
-		final ElLog.Verbosity verbosity1 = new CompilationImpl(new StdErrSink(), new IO()).gitlabCIVerbosity();
+		final ElLog.Verbosity verbosity1 = new Compilation(new StdErrSink(), new IO()).gitlabCIVerbosity();
 		final AccessBus ab = new AccessBus(comp);
 		final PipelineLogic pl = new PipelineLogic(ab);
 		final GeneratePhase generatePhase = new GeneratePhase(verbosity1, pl);

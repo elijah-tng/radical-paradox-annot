@@ -12,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
 import tripleo.elijah.comp.*;
-import tripleo.elijah.comp.internal.CompilationImpl;
 import tripleo.elijah.entrypoints.MainClassEntryPoint;
 import tripleo.elijah.lang.ClassStatement;
 import tripleo.elijah.lang.FunctionDef;
@@ -38,13 +37,13 @@ public class TestGenFunction {
 	@Test
 	public void testDemoElNormalFact1Elijah() throws Exception {
 		final StdErrSink      eee = new StdErrSink();
-		final CompilationImpl c   = new CompilationImpl(eee, new IO());
+		final Compilation c   = new Compilation(eee, new IO());
 
 		final String f = "test/demo-el-normal/fact1.elijah";
 		final File file = new File(f);
 		final OS_Module m = c.realParseElijjahFile(f, file, false);
 		Assert.assertNotNull("Method parsed correctly", m);
-		m.prelude = c.findPrelude("c").success(); // TODO we dont know which prelude to find yet
+		m.setPrelude(c.findPrelude("c").success()); // TODO we dont know which prelude to find yet
 
 		//
 		//
@@ -53,7 +52,7 @@ public class TestGenFunction {
 		assert main_class != null;
 		final MainClassEntryPoint mainClassEntryPoint = new MainClassEntryPoint(main_class);
 //		m.entryPoints = new EntryPointList();
-		m.entryPoints.add(mainClassEntryPoint);
+		m.getEntryPoints().add(mainClassEntryPoint);
 		//
 		//
 		//
@@ -69,7 +68,7 @@ public class TestGenFunction {
 		final @NotNull GeneratePhase generatePhase1 = c.getPipelineLogic().generatePhase;//new GeneratePhase();
 		final GenerateFunctions gfm = generatePhase1.getGenerateFunctions(m);
 		final @NotNull DeducePhase dp = c.getPipelineLogic().dp;//new DeducePhase(generatePhase1);
-		gfm.generateFromEntryPoints(m.entryPoints, dp);
+		gfm.generateFromEntryPoints(m.getEntryPoints(), dp);
 
 		final DeducePhase.@NotNull GeneratedClasses lgc = dp.generatedClasses; //new ArrayList<>();
 
@@ -202,7 +201,7 @@ public class TestGenFunction {
 			}
 		});
 
-		dp.deduceModule(m, lgc, false, CompilationImpl.gitlabCIVerbosity());
+		dp.deduceModule(m, lgc, false, Compilation.gitlabCIVerbosity());
 		dp.finish(dp.generatedClasses);
 
 		Assert.assertEquals("Not all hooks ran", 4, ran_hooks.size());
@@ -212,7 +211,7 @@ public class TestGenFunction {
 	@Test
 	public void testGenericA() throws Exception {
 		final StdErrSink errSink = new StdErrSink();
-		final Compilation c = new CompilationImpl(errSink, new IO());
+		final Compilation c = new Compilation(errSink, new IO());
 
 		final String f = "test/basic1/genericA/";
 
@@ -222,7 +221,7 @@ public class TestGenFunction {
 //	@Test // ignore because of generateAllTopLevelClasses
 	public void testBasic1Backlink1Elijah() throws Exception {
 //		final StdErrSink eee = new StdErrSink();
-//		final Compilation c = new CompilationImpl(eee, new IO());
+//		final Compilation c = new Compilation(eee, new IO());
 //
 //		final String f = "test/basic1/backlink1.elijah";
 //		final File file = new File(f);
@@ -302,7 +301,7 @@ public class TestGenFunction {
 	@Test
 	public void testBasic1Backlink3Elijah() throws Exception {
 		final StdErrSink eee = new StdErrSink();
-		final Compilation c = new CompilationImpl(eee, new IO());
+		final Compilation c = new Compilation(eee, new IO());
 
 		final String ff = "test/basic1/backlink3/";
 		c.feedCmdLine(List_of(ff));

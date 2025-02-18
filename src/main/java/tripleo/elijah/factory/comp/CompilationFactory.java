@@ -6,6 +6,7 @@ import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.comp.ErrSink;
 import tripleo.elijah.comp.IO;
 import tripleo.elijah.comp.StdErrSink;
+import tripleo.elijah.comp.internal.CompilationImpl;
 import tripleo.elijah.testing.comp.IFunctionMapHook;
 
 import java.util.List;
@@ -25,6 +26,6 @@ public class CompilationFactory {
 
 	@Contract("_, _ -> new")
 	public static @NotNull Compilation mkCompilation(final ErrSink eee, final IO io) {
-		return new Compilation(eee, io);
+		return new CompilationImpl(eee, io);
 	}
 }

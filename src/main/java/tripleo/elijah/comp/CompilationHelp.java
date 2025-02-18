@@ -132,7 +132,7 @@ class OStageProcess implements RuntimeProcess {
 		final Compilation comp = ca.getCompilation();
 
 		ppl.then((pl) -> {
-			final Pipeline ps = comp.getPipelines();
+			final Pipeline ps = comp.processModel().getPipelines();
 
 			try {
 				ps.run();
@@ -141,7 +141,7 @@ class OStageProcess implements RuntimeProcess {
 				comp.getErrSink().exception(ex);
 			}
 
-			comp.writeLogs(comp.getCfg().silent, comp.getElLogs());
+			comp.moveMe().writeLogs(comp.getCfg().silent, comp.getElLogs());
 		});
 	}
 

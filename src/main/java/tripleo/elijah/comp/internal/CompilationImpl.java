@@ -54,8 +54,10 @@ public class CompilationImpl implements Compilation {
     private                PipelineLogic           pipelineLogic;
     private                CompilationRunner       __cr;
     private                CompilerInstructions    rootCI;
+	private final RpProcessModel _processModel;
+	private final MoveMe _moveMe;
 
-    public CompilationImpl(final ErrSink aErrSink, final IO aIo) {
+	public CompilationImpl(final ErrSink aErrSink, final IO aIo) {
         errSink            = aErrSink;
         io                 = aIo;
         _compilationNumber = new Random().nextInt(Integer.MAX_VALUE);
@@ -83,7 +85,34 @@ public class CompilationImpl implements Compilation {
                 return _packageCode++;
             }
         };
-    }
+				_processModel = new RpProcessModel() {
+					@Override
+					public Pipeline getPipelines() {
+						return _c.pipelines;
+					}
+				};
+				_moveMe = new MoveMe() {
+					@Override
+					public void writeLogs(final boolean aSilent, final List<ElLog> aElLogs) {
+						final Multimap<String, ElLog> logMap = ArrayListMultimap.create();
+						if (RpFeatureFlags.Compilation_writeLogs) {
+								for (final ElLog deduceLog : aElLogs) {
+										logMap.put(deduceLog.getFileName(), deduceLog);
+								}
+								for (final Map.Entry<String, Collection<ElLog>> stringCollectionEntry : logMap.asMap().entrySet()) {
+										final F202 f202 = new F202(_c.getErrSink(), _c);
+										f202.processLogs(stringCollectionEntry.getValue());
+								}
+						}
+					}
+				};
+	}
+
+	public enum RpFeatureFlags {
+		;
+
+		public static final boolean Compilation_writeLogs = true;
+	}
 
     void hasInstructions(final @NotNull List<CompilerInstructions> cis) throws Exception {
         assert cis.size() > 0;
@@ -284,11 +313,7 @@ public class CompilationImpl implements Compilation {
         return getDeducePhase().generatedClasses.copy();
     }
 
-    public Pipeline getPipelines() {
-        return pipelines;
-    }
-
-    public ModuleBuilder moduleBuilder() {
+	public ModuleBuilder moduleBuilder() {
         return new ModuleBuilder(this);
     }
 
@@ -296,7 +321,17 @@ public class CompilationImpl implements Compilation {
         throw new NotImplementedException();
     }
 
-    @Override
+	@Override
+	public RpProcessModel processModel() {
+		return this._processModel;
+	}
+
+	@Override
+	public MoveMe moveMe() {
+		return this._moveMe;
+	}
+
+	@Override
     public @NotNull EOT_OutputTree getOutputTree() {
         if (_output_tree == null) {
             _output_tree = new EOT_OutputTree();
