@@ -28,8 +28,8 @@ public class TestIdentNormal {
 
 //	@Test(expected = IllegalStateException.class) // TODO proves nothing
 	public void test() {
-		final Compilation comp = new CompilationImpl(new StdErrSink(), new IO());
-		final OS_Module mod = new OS_Module();//mock(OS_Module.class);
+		final CompilationImpl comp = new CompilationImpl(new StdErrSink(), new IO());
+		final OS_Module       mod  = new OS_Module();//mock(OS_Module.class);
 		mod.setParent(comp);
 		final FunctionDef fd = mock(FunctionDef.class);
 		final Context ctx1 = mock(Context.class);
@@ -90,8 +90,8 @@ public class TestIdentNormal {
 
 //	@Test // TODO just a mess
 	public void test2() {
-		final Compilation comp = new CompilationImpl(new StdErrSink(), new IO());
-		final OS_Module mod = new OS_Module();
+		final CompilationImpl comp = new CompilationImpl(new StdErrSink(), new IO());
+		final OS_Module       mod  = new OS_Module();
 		mod.setParent(comp);
 //		FunctionDef fd = mock(FunctionDef.class);
 		final Context ctx2 = mock(Context.class);

@@ -14,18 +14,18 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.*;
 
-class USE {
-	private static final FilenameFilter         accept_source_files = (directory, file_name) -> {
+public class USE {
+	private static final FilenameFilter  accept_source_files = (directory, file_name) -> {
 		final boolean matches = Pattern.matches(".+\\.elijah$", file_name)
 		  || Pattern.matches(".+\\.elijjah$", file_name);
 		return matches;
 	};
-	private final        Compilation            c;
-	private final        ErrSink                errSink;
+	private final        CompilationImpl c;
+	private final        ErrSink         errSink;
 	private final        Map<String, OS_Module> fn2m                = new HashMap<String, OS_Module>();
 
 	@Contract(pure = true)
-	public USE(final Compilation aCompilation) {
+	public USE(final CompilationImpl aCompilation) {
 		c       = aCompilation;
 		errSink = c.getErrSink();
 	}
@@ -115,7 +115,7 @@ class USE {
 
 				if (mm.getLsp() == null) {
 					// TODO we dont know which prelude to find yet
-					final Operation2<OS_Module> pl = findPrelude(Compilation.CompilationAlways.defaultPrelude());
+					final Operation2<OS_Module> pl = findPrelude(CompilationAlways.defaultPrelude());
 
 					// NOTE Go. infectious. tedious. also slightly lazy
 					assert pl.mode() == Mode.SUCCESS;

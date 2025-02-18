@@ -152,7 +152,7 @@ public class PipelineLogic implements AccessBus.AB_ModuleListListener {
 	}
 
 	public void addLog(final ElLog aLog) {
-		__ab.getCompilation().elLogs.add(aLog);
+		__ab.getCompilation().getElLogs().add(aLog);
 	}
 
 	@Override

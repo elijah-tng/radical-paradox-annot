@@ -30,8 +30,8 @@ import java.util.stream.*;
  * Created 8/21/21 10:19 PM
  */
 public class WritePipeline implements PipelineMember, AccessBus.AB_GenerateResultListener {
-	private final Compilation c;
-	private GenerateResult gr;
+	private final CompilationImpl c;
+	private       GenerateResult  gr;
 
 	final OutputStrategy os;
 	final ElSystem sys;

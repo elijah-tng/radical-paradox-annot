@@ -8,15 +8,15 @@ import tripleo.elijah.util.*;
 
 import java.util.*;
 
-class CompilerInstructionsObserver implements Observer<CompilerInstructions> {
+public class CompilerInstructionsObserver implements Observer<CompilerInstructions> {
 	private final List<CompilerInstructions> l = new ArrayList<>();
-	private final Compilation                compilation;
+	private final CompilationImpl            compilation;
 
-	public CompilerInstructionsObserver(final Compilation aCompilation, final OptionsProcessor ignoredAOp) {
+	public CompilerInstructionsObserver(final CompilationImpl aCompilation, final OptionsProcessor ignoredAOp) {
 		compilation = aCompilation;
 	}
 
-	public CompilerInstructionsObserver(final Compilation aCompilation, final OptionsProcessor ignoredAOp, final Compilation.CIS cis) {
+	public CompilerInstructionsObserver(final CompilationImpl aCompilation, final OptionsProcessor ignoredAOp, final CIS cis) {
 		compilation = aCompilation;
 		cis._cio    = this;
 

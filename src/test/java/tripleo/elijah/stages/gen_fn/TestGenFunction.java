@@ -11,11 +11,7 @@ package tripleo.elijah.stages.gen_fn;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
-import tripleo.elijah.comp.AccessBus;
-import tripleo.elijah.comp.Compilation;
-import tripleo.elijah.comp.IO;
-import tripleo.elijah.comp.PipelineLogic;
-import tripleo.elijah.comp.StdErrSink;
+import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.internal.CompilationImpl;
 import tripleo.elijah.entrypoints.MainClassEntryPoint;
 import tripleo.elijah.lang.ClassStatement;
@@ -41,8 +37,8 @@ public class TestGenFunction {
 
 	@Test
 	public void testDemoElNormalFact1Elijah() throws Exception {
-		final StdErrSink eee = new StdErrSink();
-		final Compilation c = new CompilationImpl(eee, new IO());
+		final StdErrSink      eee = new StdErrSink();
+		final CompilationImpl c   = new CompilationImpl(eee, new IO());
 
 		final String f = "test/demo-el-normal/fact1.elijah";
 		final File file = new File(f);
@@ -68,11 +64,11 @@ public class TestGenFunction {
 		final AccessBus ab = new AccessBus(c);
 		ab.addPipelineLogic(PipelineLogic::new);
 
-		c.pipelineLogic = ab.__getPL();
+		c.setPipelineLogic(ab.__getPL());
 
-		final @NotNull GeneratePhase generatePhase1 = c.pipelineLogic.generatePhase;//new GeneratePhase();
+		final @NotNull GeneratePhase generatePhase1 = c.getPipelineLogic().generatePhase;//new GeneratePhase();
 		final GenerateFunctions gfm = generatePhase1.getGenerateFunctions(m);
-		final @NotNull DeducePhase dp = c.pipelineLogic.dp;//new DeducePhase(generatePhase1);
+		final @NotNull DeducePhase dp = c.getPipelineLogic().dp;//new DeducePhase(generatePhase1);
 		gfm.generateFromEntryPoints(m.entryPoints, dp);
 
 		final DeducePhase.@NotNull GeneratedClasses lgc = dp.generatedClasses; //new ArrayList<>();
@@ -206,7 +202,7 @@ public class TestGenFunction {
 			}
 		});
 
-		dp.deduceModule(m, lgc, false, Compilation.gitlabCIVerbosity());
+		dp.deduceModule(m, lgc, false, CompilationImpl.gitlabCIVerbosity());
 		dp.finish(dp.generatedClasses);
 
 		Assert.assertEquals("Not all hooks ran", 4, ran_hooks.size());

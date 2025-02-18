@@ -8,47 +8,35 @@
  */
 package tripleo.elijah.comp.internal;
 
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import org.jetbrains.annotations.*;
+import tripleo.elijah.ci.CompilerInstructions;
 import tripleo.elijah.comp.*;
+import tripleo.elijah.comp.functionality.f202.F202;
+import tripleo.elijah.comp.queries.QueryEzFileToModule;
+import tripleo.elijah.comp.queries.QueryEzFileToModuleParams;
+import tripleo.elijah.lang.ClassStatement;
+import tripleo.elijah.lang.OS_Module;
+import tripleo.elijah.lang.OS_Package;
+import tripleo.elijah.lang.Qualident;
 import tripleo.elijah.nextgen.outputtree.*;
+import tripleo.elijah.nextgen.query.Operation2;
+import tripleo.elijah.stages.deduce.DeducePhase;
+import tripleo.elijah.stages.deduce.FunctionMapHook;
 import tripleo.elijah.stages.deduce.fluffy.i.*;
 import tripleo.elijah.stages.deduce.fluffy.impl.*;
+import tripleo.elijah.stages.gen_fn.GeneratedNode;
+import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.testing.comp.*;
 import tripleo.elijah.util.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
-public class CompilationImpl extends Compilation {
-
-	private final @NotNull FluffyCompImpl _fluffyComp;
-	private @Nullable EOT_OutputTree _output_tree = null;
-
-	public CompilationImpl(final ErrSink aEee, final IO aIo) {
-		super(aEee, aIo);
-		_fluffyComp = new FluffyCompImpl(this);
-	}
-
-	public void testMapHooks(final List<IFunctionMapHook> aMapHooks) {
-		throw new NotImplementedException();
-	}
-
-	@Override
-	public @NotNull EOT_OutputTree getOutputTree() {
-		if (_output_tree == null) {
-			_output_tree = new EOT_OutputTree();
-		}
-
-		assert _output_tree != null;
-
-		return _output_tree;
-	}
-
-	@Override
-	public @NotNull FluffyComp getFluffy() {
-		return _fluffyComp;
-	}
-
-}
+// public class CompilationImpl extends Compilation {
+// }
 
 //
 //

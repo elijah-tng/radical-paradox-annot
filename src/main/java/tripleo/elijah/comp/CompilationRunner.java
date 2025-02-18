@@ -13,14 +13,14 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.*;
 
-class CompilationRunner {
+public class CompilationRunner {
 	final         Map<String, CompilerInstructions> fn2ci = new HashMap<String, CompilerInstructions>();
-	private final Compilation                       compilation;
-	private final Compilation.CIS                   cis;
-	private final CCI                               cci;
+	private final CompilationImpl                   compilation;
+	private final CIS                               cis;
+	private final CCI         cci;
 
 	@Contract(pure = true)
-	CompilationRunner(final Compilation aCompilation, final Compilation.CIS a_cis) {
+    public CompilationRunner(final CompilationImpl aCompilation, final CIS a_cis) {
 		compilation = aCompilation;
 		cis         = a_cis;
 		cci         = new CCI(compilation, a_cis);
@@ -34,7 +34,7 @@ class CompilationRunner {
 		//   -- question placement
 		//   -- ...
 		{
-			final Operation<CompilerInstructions> x = findStdLib(Compilation.CompilationAlways.defaultPrelude(), compilation);
+			final Operation<CompilerInstructions> x = findStdLib(CompilationAlways.defaultPrelude(), compilation);
 			if (x.mode() == Mode.FAILURE) {
 				compilation.getErrSink().exception(x.failure());
 				return;

@@ -12,9 +12,9 @@ import java.io.*;
 
 public class QuerySourceFileToModule {
 	private final QuerySourceFileToModuleParams params;
-	private       Compilation                   compilation;
+	private       CompilationImpl               compilation;
 
-	public QuerySourceFileToModule(final QuerySourceFileToModuleParams aParams, final Compilation aCompilation) {
+	public QuerySourceFileToModule(final QuerySourceFileToModuleParams aParams, final CompilationImpl aCompilation) {
 		params      = aParams;
 		compilation = aCompilation;
 	}

@@ -11,12 +11,7 @@ package tripleo.elijah.lang;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import tripleo.elijah.comp.AccessBus;
-import tripleo.elijah.comp.Compilation;
-import tripleo.elijah.comp.ErrSink;
-import tripleo.elijah.comp.IO;
-import tripleo.elijah.comp.PipelineLogic;
-import tripleo.elijah.comp.StdErrSink;
+import tripleo.elijah.comp.*;
 import tripleo.elijah.comp.internal.CompilationImpl;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.DeduceTypes2;
@@ -36,8 +31,8 @@ public class TypeOfTypeNameTest {
 		// CREATE MOCKS
 		//
 		final Context     ctx = mock(Context.class);
-		final OS_Module   mod = mock(OS_Module.class);
-		final Compilation c   = new CompilationImpl(new StdErrSink(), new IO());
+		final OS_Module       mod = mock(OS_Module.class);
+		final CompilationImpl c   = new CompilationImpl(new StdErrSink(), new IO());
 
 		//
 		// CREATE VARIABLES
@@ -72,7 +67,7 @@ public class TypeOfTypeNameTest {
 		//
 		// VERIFY EXPECTATIONS
 		//
-		final ElLog.Verbosity verbosity1    = Compilation.gitlabCIVerbosity();
+		final ElLog.Verbosity verbosity1    = CompilationImpl.gitlabCIVerbosity();
 		final AccessBus       ab            = new AccessBus(c);
 		final PipelineLogic   pl            = new PipelineLogic(ab);
 		final GeneratePhase   generatePhase = new GeneratePhase(verbosity1, pl);
@@ -89,8 +84,8 @@ public class TypeOfTypeNameTest {
 		// CREATE MOCKS
 		//
 		final Context     ctx = mock(Context.class);
-		final OS_Module   mod = mock(OS_Module.class);
-		final Compilation c   = new CompilationImpl(new StdErrSink(), new IO());
+		final OS_Module       mod = mock(OS_Module.class);
+		final CompilationImpl c   = new CompilationImpl(new StdErrSink(), new IO());
 
 		//
 		// CREATE VARIABLES
@@ -127,7 +122,7 @@ public class TypeOfTypeNameTest {
 		//
 		// VERIFY EXPECTATIONS
 		//
-		final ElLog.Verbosity verbosity1    = Compilation.gitlabCIVerbosity();
+		final ElLog.Verbosity verbosity1    = CompilationImpl.gitlabCIVerbosity();
 		final AccessBus       ab            = new AccessBus(c);
 		final PipelineLogic   pl            = new PipelineLogic(ab);
 		final GeneratePhase   generatePhase = new GeneratePhase(verbosity1, pl);
@@ -262,7 +257,7 @@ public class TypeOfTypeNameTest {
 //		expect(mod.parent.getSilence()).andReturn(true); //ElLog.Verbosity.SILENT); // TODO is this *really* correct
 
 //		OS_Module mod = mock(OS_Module.class);
-		final ElLog.Verbosity verbosity1    = Compilation.gitlabCIVerbosity();
+		final ElLog.Verbosity verbosity1    = CompilationImpl.gitlabCIVerbosity();
 		final AccessBus       ab            = new AccessBus(mod.parent);
 		final PipelineLogic   pl            = new PipelineLogic(ab);
 		final GeneratePhase   generatePhase = new GeneratePhase(verbosity1, pl);

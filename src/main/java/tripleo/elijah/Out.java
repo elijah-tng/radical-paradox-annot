@@ -9,7 +9,7 @@
 package tripleo.elijah;
 
 import org.jetbrains.annotations.NotNull;
-import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.comp.CompilationImpl;
 import tripleo.elijah.lang.OS_Module;
 import tripleo.elijah.lang.ParserClosure;
 import tripleo.elijah.util.TabbedOutputStream;
@@ -24,7 +24,7 @@ public class Out {
 //	private final Compilation compilation;
 //	private boolean do_out = false;
 
-	public Out(final String fn, final Compilation compilation, final boolean do_out) {
+	public Out(final String fn, final CompilationImpl compilation, final boolean do_out) {
 		pc = new ParserClosure(fn, compilation);
 //		this.compilation = compilation;
 //		this.do_out = do_out;

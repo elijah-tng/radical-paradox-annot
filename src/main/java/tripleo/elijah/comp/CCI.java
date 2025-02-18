@@ -6,10 +6,10 @@ import tripleo.elijah.stages.deduce.post_bytecode.*;
 
 class CCI {
 	//private final @NotNull Compilation compilation;
-	private final Compilation.CIS _cis;
+	private final CIS _cis;
 
 	@Contract(pure = true)
-	CCI(final @NotNull Compilation aCompilation, final Compilation.CIS aCis) {
+	CCI(final @NotNull Compilation aCompilation, final CIS aCis) {
 		//compilation = aCompilation;
 		_cis = aCis;
 	}

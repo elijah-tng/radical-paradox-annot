@@ -36,7 +36,7 @@ public class OS_Module implements OS_Element, OS_Container {
 	public final @NotNull                      EntryPointList       entryPoints    = new EntryPointList();
 	private final                              Stack<Qualident>     packageNames_q = new Stack<Qualident>();
 	public @org.jetbrains.annotations.Nullable OS_Module            prelude;
-	public                                     Compilation          parent;
+	public                                     CompilationImpl      parent;
 	private                                    LibraryStatementPart lsp;
 	private                                    String               _fileName;
 	private                                    IndexingStatement    indexingStatement;
@@ -141,7 +141,7 @@ public class OS_Module implements OS_Element, OS_Container {
 		return null;
 	}
 
-	public void setParent(@NotNull final Compilation parent) {
+	public void setParent(@NotNull final CompilationImpl parent) {
 		this.parent = parent;
 	}
 
@@ -220,7 +220,7 @@ public class OS_Module implements OS_Element, OS_Container {
 		lsp = aLsp;
 	}
 
-	public Compilation getCompilation() {
+	public CompilationImpl getCompilation() {
 		return parent;
 	}
 }

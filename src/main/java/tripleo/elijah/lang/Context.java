@@ -10,7 +10,7 @@ package tripleo.elijah.lang;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.comp.CompilationImpl;
 import tripleo.elijah.contexts.ModuleContext;
 
 import java.util.ArrayList;
@@ -71,7 +71,7 @@ public abstract class Context {
 		return ((ModuleContext) ctx).getCarrier();
 	}
 
-	public @NotNull Compilation compilation() {
+	public @NotNull CompilationImpl compilation() {
 		final OS_Module module = module();
 		return module.parent;
 	}
