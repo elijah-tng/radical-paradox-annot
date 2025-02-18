@@ -87,7 +87,7 @@ public class TestGenFunction {
 
 		final WorkManager wm = new WorkManager();
 
-		c.addFunctionMapHook(new FunctionMapHook(){
+		c.moveMe().addFunctionMapHook(new FunctionMapHook(){
 			@Override
 			public boolean matches(final FunctionDef fd) {
 				final boolean b = fd.name().equals("main") && fd.getParent() == main_class;
@@ -113,7 +113,7 @@ public class TestGenFunction {
 			}
 		});
 
-		c.addFunctionMapHook(new FunctionMapHook(){
+		c.moveMe().addFunctionMapHook(new FunctionMapHook(){
 			@Override
 			public boolean matches(final FunctionDef fd) {
 				final boolean b = fd.name().equals("factorial") && fd.getParent() == main_class;
@@ -145,7 +145,7 @@ public class TestGenFunction {
 			}
 		});
 
-		c.addFunctionMapHook(new FunctionMapHook(){
+		c.moveMe().addFunctionMapHook(new FunctionMapHook(){
 			@Override
 			public boolean matches(final FunctionDef fd) {
 				final boolean b = fd.name().equals("main") && fd.getParent() == main_class;
@@ -173,7 +173,7 @@ public class TestGenFunction {
 			}
 		});
 
-		c.addFunctionMapHook(new FunctionMapHook(){
+		c.moveMe().addFunctionMapHook(new FunctionMapHook(){
 			@Override
 			public boolean matches(final FunctionDef fd) {
 				final boolean b = fd.name().equals("factorial") && fd.getParent() == main_class;
