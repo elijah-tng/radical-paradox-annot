@@ -38,7 +38,7 @@ public class FindBothSourceFiles {
 		final List<String> args = List_of("test/demo-el-normal", "test/demo-el-normal/main2", "-sE");
 //		ErrSink eee = JMock.of(ErrSink.class);
 		final ErrSink     eee = new StdErrSink();
-		final Compilation c   = new Compilation(eee, new IO());
+		final Compilation c   = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(eee, new IO());
 
 		c.feedCmdLine(args);
 

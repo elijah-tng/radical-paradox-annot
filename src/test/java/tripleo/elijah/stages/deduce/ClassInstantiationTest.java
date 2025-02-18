@@ -23,7 +23,7 @@ public class ClassInstantiationTest {
 	@Test
 	public void classInstantiation() throws Exception {
 		final String      f = "test/basic1/class_instantiation/";
-		final Compilation c = new Compilation(new StdErrSink(), new IO());
+		final Compilation c = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 
 		c.feedCmdLine(List_of(f));
 	}
@@ -31,7 +31,7 @@ public class ClassInstantiationTest {
 	@Test
 	public void classInstantiation2() throws Exception {
 		final String      f = "test/basic1/class_instantiation2/";
-		final Compilation c = new Compilation(new StdErrSink(), new IO());
+		final Compilation c = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 
 		c.feedCmdLine(List_of(f));
 	}
@@ -39,7 +39,7 @@ public class ClassInstantiationTest {
 	@Test
 	public void classInstantiation3() throws Exception {
 		final String      f = "test/basic1/class_instantiation3/";
-		final Compilation c = new Compilation(new StdErrSink(), new IO());
+		final Compilation c = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 
 		c.feedCmdLine(List_of(f));
 	}

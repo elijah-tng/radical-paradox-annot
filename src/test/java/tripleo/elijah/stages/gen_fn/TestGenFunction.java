@@ -37,7 +37,7 @@ public class TestGenFunction {
 	@Test
 	public void testDemoElNormalFact1Elijah() throws Exception {
 		final StdErrSink      eee = new StdErrSink();
-		final Compilation c   = new Compilation(eee, new IO());
+		final Compilation c   = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(eee, new IO());
 
 		final String f = "test/demo-el-normal/fact1.elijah";
 		final File file = new File(f);
@@ -211,7 +211,7 @@ public class TestGenFunction {
 	@Test
 	public void testGenericA() throws Exception {
 		final StdErrSink errSink = new StdErrSink();
-		final Compilation c = new Compilation(errSink, new IO());
+		final Compilation c = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(errSink, new IO());
 
 		final String f = "test/basic1/genericA/";
 
@@ -221,7 +221,7 @@ public class TestGenFunction {
 //	@Test // ignore because of generateAllTopLevelClasses
 	public void testBasic1Backlink1Elijah() throws Exception {
 //		final StdErrSink eee = new StdErrSink();
-//		final Compilation c = new Compilation(eee, new IO());
+//		final Compilation c = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(eee, new IO());
 //
 //		final String f = "test/basic1/backlink1.elijah";
 //		final File file = new File(f);
@@ -301,7 +301,7 @@ public class TestGenFunction {
 	@Test
 	public void testBasic1Backlink3Elijah() throws Exception {
 		final StdErrSink eee = new StdErrSink();
-		final Compilation c = new Compilation(eee, new IO());
+		final Compilation c = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(eee, new IO());
 
 		final String ff = "test/basic1/backlink3/";
 		c.feedCmdLine(List_of(ff));

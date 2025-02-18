@@ -38,7 +38,7 @@ public class TestBasic {
 		args.addAll(ez_files);
 		args.add("-sE");
 		final ErrSink     eee = new StdErrSink();
-		final Compilation c   = new Compilation(eee, new IO());
+		final Compilation c   = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(eee, new IO());
 
 		c.feedCmdLine(args);
 
@@ -54,7 +54,7 @@ public class TestBasic {
 		for (final String s : ez_files) {
 //			List<String> args = List_of("test/basic", "-sO"/*, "-out"*/);
 			final ErrSink     eee = new StdErrSink();
-			final Compilation c   = new Compilation(eee, new IO());
+			final Compilation c   = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(eee, new IO());
 
 			c.feedCmdLine(List_of(s, "-sO"));
 
@@ -75,7 +75,7 @@ public class TestBasic {
 		final String s = "test/basic/listfolders3/listfolders3.ez";
 
 		final ErrSink     eee = new StdErrSink();
-		final Compilation c   = new Compilation(eee, new IO());
+		final Compilation c   = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(eee, new IO());
 
 		c.feedCmdLine(List_of(s, "-sO"));
 
@@ -90,7 +90,7 @@ public class TestBasic {
 		final String s = "test/basic/listfolders4/listfolders4.ez";
 
 		final ErrSink     eee = new StdErrSink();
-		final Compilation c   = new Compilation(eee, new IO());
+		final Compilation c   = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(eee, new IO());
 
 		c.feedCmdLine(List_of(s, "-sO"));
 
@@ -105,7 +105,7 @@ public class TestBasic {
 		final String s = "test/basic/fact1/main2";
 
 		final ErrSink     eee = new StdErrSink();
-		final Compilation c   = new Compilation(eee, new IO());
+		final Compilation c   = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(eee, new IO());
 
 		c.feedCmdLine(List_of(s, "-sO"));
 

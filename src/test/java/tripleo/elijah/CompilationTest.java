@@ -30,7 +30,7 @@ public class CompilationTest {
 	public final void testEz() throws Exception {
 		final List<String> args = List_of("test/comp_test/main3", "-sE"/*, "-out"*/);
 		final ErrSink         eee = new StdErrSink();
-		final Compilation c   = new Compilation(eee, new IO());
+		final Compilation c   = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(eee, new IO());
 
 		c.feedCmdLine(args);
 

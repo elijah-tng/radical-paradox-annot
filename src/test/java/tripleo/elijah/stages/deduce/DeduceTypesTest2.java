@@ -24,9 +24,9 @@ public class DeduceTypesTest2 {
 	@Test
 	public void testDeduceIdentExpression() throws ResolveError {
 		final OS_Module       mod = new OS_Module();
-		final Compilation c   = new Compilation(new StdErrSink(), new IO());
+		final Compilation c   = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 		mod.setParent(c);
-		mod.setPrelude(mod.getParent().findPrelude("c").success());
+		mod.setPrelude(mod.getCompilation().findPrelude("c").success());
 		final ModuleContext mctx = new ModuleContext(mod);
 		mod.setContext(mctx);
 		final ClassStatement cs = new ClassStatement(mod, mctx);
@@ -52,7 +52,7 @@ public class DeduceTypesTest2 {
 		//
 		//
 		//
-		final ElLog.Verbosity verbosity1    = c.gitlabCIVerbosity();
+		final ElLog.Verbosity verbosity1    = Compilation.gitlabCIVerbosity();
 		final AccessBus       ab            = new AccessBus(c);
 		final PipelineLogic   pl            = new PipelineLogic(ab);
 		final GeneratePhase   generatePhase = new GeneratePhase(verbosity1, pl);

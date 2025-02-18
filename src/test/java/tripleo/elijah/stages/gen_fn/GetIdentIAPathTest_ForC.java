@@ -91,7 +91,7 @@ public class GetIdentIAPathTest_ForC {
 
 		//		el1.add(vsq);
 		//
-		final Compilation   c             = new Compilation(new StdErrSink(), new IO());
+		final Compilation   c             = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 		final ElLog.Verbosity   verbosity1    = Compilation.gitlabCIVerbosity();
 		final AccessBus         ab            = new AccessBus(c);
 		final PipelineLogic     pl            = new PipelineLogic(ab);
@@ -119,7 +119,7 @@ public class GetIdentIAPathTest_ForC {
 		final IdentExpression          x_ident   = Helpers.string_to_ident("x");
 		@NotNull final IdentExpression foo_ident = Helpers.string_to_ident("foo");
 		//
-		final Compilation   c             = new Compilation(new StdErrSink(), new IO());
+		final Compilation   c             = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 		final ElLog.Verbosity   verbosity1    = Compilation.gitlabCIVerbosity();
 		final AccessBus         ab            = new AccessBus(c);
 		final PipelineLogic     pl            = new PipelineLogic(ab);
@@ -202,7 +202,7 @@ public class GetIdentIAPathTest_ForC {
 		//
 		final DotExpression expr = new DotExpression(x_ident, foo_ident);
 		//
-		final Compilation     c             = new Compilation(new StdErrSink(), new IO());
+		final Compilation     c             = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 		final ElLog.Verbosity     verbosity1    = Compilation.gitlabCIVerbosity();
 		final AccessBus           ab            = new AccessBus(c);
 		final PipelineLogic       pl            = new PipelineLogic(ab);
