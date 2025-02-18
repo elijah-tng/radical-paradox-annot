@@ -14,7 +14,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import tripleo.elijah.comp.*;
+import tripleo.elijah.comp.AccessBus;
+import tripleo.elijah.comp.IO;
+import tripleo.elijah.comp.PipelineLogic;
+import tripleo.elijah.comp.StdErrSink;
 import tripleo.elijah.lang.*;
 import tripleo.elijah.stages.gen_fn.GeneratedFunction;
 import tripleo.elijah.stages.gen_fn.TypeTableEntry;
@@ -57,7 +60,7 @@ public class GetRealTargetNameTest {
 		final IdentIA        ident_ia  = new IdentIA(ite_index, gf);
 		ident_ia.setPrev(new IntegerIA(int_index, gf));
 		//
-		final AccessBus               ab = new AccessBus(new Compilation(new StdErrSink(), new IO()));
+		final AccessBus               ab = new AccessBus(tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO()));
 		final PipelineLogic           pl = new PipelineLogic(ab);
 		final OutputFileFactoryParams p  = new OutputFileFactoryParams(mod, new StdErrSink(), ElLog.Verbosity.SILENT, pl);  // TODO do we want silent?
 		final GenerateC               c  = new GenerateC(p);
