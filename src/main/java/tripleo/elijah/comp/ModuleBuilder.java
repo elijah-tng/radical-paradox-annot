@@ -10,7 +10,7 @@ public class ModuleBuilder {
 	private       boolean   _addToCompilation = false;
 	private       String    _fn               = null;
 
-	public ModuleBuilder(Compilation aCompilation) {
+	public ModuleBuilder(CompilationImpl aCompilation) {
 //			compilation = aCompilation;
 		mod = new OS_Module();
 		mod.setParent(aCompilation);

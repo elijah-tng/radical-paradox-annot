@@ -29,7 +29,7 @@ public class ImportContext extends Context {
 	public LookupResultList lookup(final String name, final int level, final LookupResultList Result, final List<Context> alreadySearched, final boolean one) {
 		alreadySearched.add(this);
 //		System.err.println("2002 "+importStatement.importList());
-		final Compilation compilation = compilation();
+		final CompilationImpl compilation = compilation();
 		for (final Qualident importStatementItem : carrier.parts()) {
 //			System.err.println("2005 "+importStatementItem);
 			if (compilation.isPackage(importStatementItem.toString())) {

@@ -12,7 +12,7 @@ public interface ICompilationAccess {
 
 	ElLog.Verbosity testSilence();
 
-	Compilation getCompilation();
+	CompilationImpl getCompilation();
 
 	void writeLogs();
 

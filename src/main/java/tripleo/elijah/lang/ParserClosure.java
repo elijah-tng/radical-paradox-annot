@@ -19,7 +19,7 @@ import tripleo.elijah.comp.*;
 
 public class ParserClosure extends ProgramClosure {
 
-	public ParserClosure(final String fn, @NotNull final Compilation compilation) {
+	public ParserClosure(final String fn, @NotNull final CompilationImpl compilation) {
 		module = compilation.moduleBuilder()
 				.withFileName(fn)
 				.addToCompilation()

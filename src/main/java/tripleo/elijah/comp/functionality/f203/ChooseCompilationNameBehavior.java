@@ -5,9 +5,9 @@ import tripleo.elijah.comp.*;
 import java.io.*;
 
 public class ChooseCompilationNameBehavior implements ChooseDirectoryNameBehavior {
-	private final Compilation c;
+	private final CompilationImpl c;
 
-	public ChooseCompilationNameBehavior(final Compilation aC) {
+	public ChooseCompilationNameBehavior(final CompilationImpl aC) {
 		c = aC;
 	}
 

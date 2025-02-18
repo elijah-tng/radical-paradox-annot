@@ -18,7 +18,7 @@ public class ApacheOptionsProcessor implements OptionsProcessor {
 	}
 
 	@Override
-	public String[] process(final @NotNull Compilation c,
+	public String[] process(final @NotNull CompilationImpl c,
 	                        final @NotNull List<String> args) throws Exception {
 		final CommandLine cmd;
 		//try {
@@ -37,7 +37,7 @@ public class ApacheOptionsProcessor implements OptionsProcessor {
 			new CC_SetDoOut(true).apply(c);
 		}
 
-		if (Compilation.isGitlab_ci() || cmd.hasOption("silent")) {
+		if (CompilationImpl.isGitlab_ci() || cmd.hasOption("silent")) {
 			new CC_SetSilent(true).apply(c);
 		}
 

@@ -12,10 +12,10 @@ import tripleo.elijah.stages.logging.*;
 import java.util.*;
 
 class DefaultCompilationAccess implements ICompilationAccess {
-	protected final Compilation                                compilation;
+	protected final CompilationImpl                            compilation;
 	private final   DeferredObject2<PipelineLogic, Void, Void> pipelineLogicDeferred = new DeferredObject2<>();
 
-	public DefaultCompilationAccess(final Compilation aCompilation) {
+	public DefaultCompilationAccess(final CompilationImpl aCompilation) {
 		compilation = aCompilation;
 	}
 
@@ -34,7 +34,7 @@ class DefaultCompilationAccess implements ICompilationAccess {
 
 	@Override
 	public void setPipelineLogic(final PipelineLogic pl) {
-		compilation.pipelineLogic = pl;
+		compilation.setPipelineLogic(pl);
 
 		pipelineLogicDeferred.resolve(pl);
 	}
@@ -56,7 +56,7 @@ class DefaultCompilationAccess implements ICompilationAccess {
 	}
 
 	@Override
-	public Compilation getCompilation() {
+	public CompilationImpl getCompilation() {
 		return compilation;
 	}
 
@@ -64,7 +64,7 @@ class DefaultCompilationAccess implements ICompilationAccess {
 	public void writeLogs() {
 		final boolean silent = testSilence() == ElLog.Verbosity.SILENT;
 
-		writeLogs(silent, compilation.elLogs);
+		writeLogs(silent, compilation.getElLogs());
 	}
 
 	@Override
@@ -79,7 +79,7 @@ class DefaultCompilationAccess implements ICompilationAccess {
 
 	@Override
 	public Stages getStage() {
-		return getCompilation().cfg.stage;
+		return getCompilation().getCfg().stage;
 	}
 
 	private void writeLogs(final boolean aSilent, final List<ElLog> aLogs) {

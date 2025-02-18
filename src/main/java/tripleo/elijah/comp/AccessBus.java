@@ -18,20 +18,20 @@ import java.util.function.*;
 import java.util.stream.*;
 
 public class AccessBus {
-	public final GenerateResult gr = new GenerateResult();
-	private final Compilation                                     _c;
-	private final DeferredObject<PipelineLogic, Void, Void>       pipeLineLogicPromise  = new DeferredObject<>();
+	public final  GenerateResult                            gr = new GenerateResult();
+	private final CompilationImpl                           _c;
+	private final DeferredObject<PipelineLogic, Void, Void> pipeLineLogicPromise  = new DeferredObject<>();
 	private final DeferredObject<List<GeneratedNode>, Void, Void> lgcPromise            = new DeferredObject<>();
 	private final DeferredObject<EIT_ModuleList, Void, Void>      moduleListPromise     = new DeferredObject<>();
 	private final DeferredObject<GenerateResult, Void, Void>      generateResultPromise = new DeferredObject<>();
 	private       PipelineLogic                                   ____pl;
 
 
-	public AccessBus(final Compilation aC) {
+	public AccessBus(final CompilationImpl aC) {
 		_c = aC;
 	}
 
-	public @NotNull Compilation getCompilation() {
+	public @NotNull CompilationImpl getCompilation() {
 		return _c;
 	}
 
@@ -96,7 +96,7 @@ public class AccessBus {
 		final OutputFileFactoryParams p         = new OutputFileFactoryParams(mod, aErrSink, verbosity, aPipelineLogic);
 		final GenerateC               generateC = new GenerateC(p);
 
-		final Compilation             ccc = mod.parent;
+		final CompilationImpl         ccc = mod.parent;
 		@NotNull final EOT_OutputTree cot = ccc.getOutputTree();
 
 		for (final GeneratedNode generatedNode : lgc) {
