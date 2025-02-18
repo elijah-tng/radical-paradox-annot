@@ -1,20 +1,23 @@
 package tripleo.elijah.comp.queries;
 
-import antlr.*;
-import tripleo.elijah.*;
-import tripleo.elijah.comp.*;
-import tripleo.elijah.lang.*;
-import tripleo.elijah.nextgen.query.*;
-import tripleo.elijah.util.*;
-import tripleo.elijjah.*;
+import antlr.RecognitionException;
+import antlr.TokenStreamException;
+import tripleo.elijah.Out;
+import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.comp.Operation;
+import tripleo.elijah.lang.OS_Module;
+import tripleo.elijah.nextgen.query.QueryDatabase;
+import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijjah.ElijjahLexer;
+import tripleo.elijjah.ElijjahParser;
 
-import java.io.*;
+import java.io.InputStream;
 
 public class QuerySourceFileToModule {
 	private final QuerySourceFileToModuleParams params;
-	private       CompilationImpl               compilation;
+	private       Compilation               compilation;
 
-	public QuerySourceFileToModule(final QuerySourceFileToModuleParams aParams, final CompilationImpl aCompilation) {
+	public QuerySourceFileToModule(final QuerySourceFileToModuleParams aParams, final Compilation aCompilation) {
 		params      = aParams;
 		compilation = aCompilation;
 	}

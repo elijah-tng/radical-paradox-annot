@@ -1,8 +1,8 @@
 package tripleo.elijah.comp;
 
-import java.util.*;
+import java.util.List;
 
 @FunctionalInterface
 public interface OptionsProcessor {
-	String[] process(final CompilationImpl c, final List<String> args) throws Exception;
+	String[] process(final Compilation c, final List<String> args) throws Exception;
 }

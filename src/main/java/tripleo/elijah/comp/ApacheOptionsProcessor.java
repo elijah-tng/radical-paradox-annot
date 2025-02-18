@@ -1,9 +1,13 @@
 package tripleo.elijah.comp;
 
-import org.apache.commons.cli.*;
-import org.jetbrains.annotations.*;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.List;
 
 public class ApacheOptionsProcessor implements OptionsProcessor {
 	final Options           options = new Options();
@@ -18,7 +22,7 @@ public class ApacheOptionsProcessor implements OptionsProcessor {
 	}
 
 	@Override
-	public String[] process(final @NotNull CompilationImpl c,
+	public String[] process(final @NotNull Compilation c,
 	                        final @NotNull List<String> args) throws Exception {
 		final CommandLine cmd;
 		//try {
@@ -37,7 +41,7 @@ public class ApacheOptionsProcessor implements OptionsProcessor {
 			new CC_SetDoOut(true).apply(c);
 		}
 
-		if (CompilationImpl.isGitlab_ci() || cmd.hasOption("silent")) {
+		if (Compilation.isGitlab_ci() || cmd.hasOption("silent")) {
 			new CC_SetSilent(true).apply(c);
 		}
 
