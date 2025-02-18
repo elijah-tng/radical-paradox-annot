@@ -1,22 +1,23 @@
 package tripleo.elijah.comp;
 
-import io.reactivex.rxjava3.annotations.*;
+import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.disposables.*;
-import tripleo.elijah.ci.*;
-import tripleo.elijah.util.*;
+import io.reactivex.rxjava3.disposables.Disposable;
+import tripleo.elijah.ci.CompilerInstructions;
+import tripleo.elijah.util.NotImplementedException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CompilerInstructionsObserver implements Observer<CompilerInstructions> {
 	private final List<CompilerInstructions> l = new ArrayList<>();
-	private final CompilationImpl            compilation;
+	private final Compilation            compilation;
 
-	public CompilerInstructionsObserver(final CompilationImpl aCompilation, final OptionsProcessor ignoredAOp) {
+	public CompilerInstructionsObserver(final Compilation aCompilation, final OptionsProcessor ignoredAOp) {
 		compilation = aCompilation;
 	}
 
-	public CompilerInstructionsObserver(final CompilationImpl aCompilation, final OptionsProcessor ignoredAOp, final CIS cis) {
+	public CompilerInstructionsObserver(final Compilation aCompilation, final OptionsProcessor ignoredAOp, final CIS cis) {
 		compilation = aCompilation;
 		cis._cio    = this;
 
@@ -46,7 +47,7 @@ public class CompilerInstructionsObserver implements Observer<CompilerInstructio
 
 	public void almostComplete() {
 		try {
-			compilation.hasInstructions(l);
+			compilation.hasInstructions(l.get(0));
 		} catch (final Exception aE) {
 			compilation.getErrSink().exception(aE);
 //			NotImplementedException.raise();

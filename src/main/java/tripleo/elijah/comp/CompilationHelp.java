@@ -8,9 +8,10 @@
  */
 package tripleo.elijah.comp;
 
-import com.google.common.base.*;
-import org.jdeferred2.impl.*;
-import org.jetbrains.annotations.*;
+import com.google.common.base.Preconditions;
+import org.jdeferred2.impl.DeferredObject;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 interface RuntimeProcess {
 	void run();
@@ -128,7 +129,7 @@ class OStageProcess implements RuntimeProcess {
 
 	@Override
 	public void run() {
-		final CompilationImpl comp = ca.getCompilation();
+		final Compilation comp = ca.getCompilation();
 
 		ppl.then((pl) -> {
 			final Pipeline ps = comp.getPipelines();
@@ -172,7 +173,7 @@ class OStageProcess implements RuntimeProcess {
 //		  .forEach(ca::addPipeline);
 
 		ppl.then(pl -> {
-			final CompilationImpl comp = ca.getCompilation();
+			final Compilation comp = ca.getCompilation();
 
 			comp.getMod().modules.stream().forEach(pl::addModule);
 		});

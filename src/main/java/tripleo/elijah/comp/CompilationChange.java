@@ -1,9 +1,10 @@
 package tripleo.elijah.comp;
 
-import org.jetbrains.annotations.*;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 interface CompilationChange {
-	void apply(final CompilationImpl c);
+	void apply(final Compilation c);
 }
 
 class CC_SetStage implements CompilationChange {
@@ -15,7 +16,7 @@ class CC_SetStage implements CompilationChange {
 	}
 
 	@Override
-	public void apply(final @NotNull CompilationImpl c) {
+	public void apply(final @NotNull Compilation c) {
 		c.getCfg().stage = Stages.valueOf(s);
 	}
 }
@@ -28,7 +29,7 @@ class CC_SetShowTree implements CompilationChange {
 	}
 
 	@Override
-	public void apply(final CompilationImpl c) {
+	public void apply(final Compilation c) {
 		c.getCfg().showTree = flag;
 	}
 }
@@ -41,7 +42,7 @@ class CC_SetDoOut implements CompilationChange {
 	}
 
 	@Override
-	public void apply(final CompilationImpl c) {
+	public void apply(final Compilation c) {
 		c.getCfg().do_out = flag;
 	}
 }
@@ -54,7 +55,7 @@ class CC_SetSilent implements CompilationChange {
 	}
 
 	@Override
-	public void apply(final CompilationImpl c) {
+	public void apply(final Compilation c) {
 		c.getCfg().silent = flag;
 	}
 }

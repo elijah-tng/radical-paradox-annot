@@ -1,32 +1,41 @@
 package tripleo.elijah.comp;
 
-import antlr.*;
-import org.jetbrains.annotations.*;
-import tripleo.elijah.ci.*;
-import tripleo.elijah.comp.diagnostic.*;
-import tripleo.elijah.comp.queries.*;
-import tripleo.elijah.diagnostic.*;
-import tripleo.elijah.nextgen.query.*;
-import tripleo.elijah.stages.deduce.post_bytecode.*;
+import antlr.ANTLRException;
+import antlr.RecognitionException;
+import antlr.TokenStreamException;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.ci.CompilerInstructions;
+import tripleo.elijah.comp.diagnostic.TooManyEz_ActuallyNone;
+import tripleo.elijah.comp.diagnostic.TooManyEz_BeSpecific;
+import tripleo.elijah.comp.queries.QueryEzFileToModule;
+import tripleo.elijah.comp.queries.QueryEzFileToModuleParams;
+import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah.nextgen.query.Mode;
+import tripleo.elijah.stages.deduce.post_bytecode.Maybe;
 
 import java.io.*;
-import java.util.*;
-import java.util.regex.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
 
 public class CompilationRunner {
 	final         Map<String, CompilerInstructions> fn2ci = new HashMap<String, CompilerInstructions>();
-	private final CompilationImpl                   compilation;
+	private final Compilation                   compilation;
 	private final CIS                               cis;
 	private final CCI         cci;
 
 	@Contract(pure = true)
-    public CompilationRunner(final CompilationImpl aCompilation, final CIS a_cis) {
+    public CompilationRunner(final Compilation aCompilation, final CIS a_cis) {
 		compilation = aCompilation;
 		cis         = a_cis;
 		cci         = new CCI(compilation, a_cis);
 	}
 
-	void start(final CompilerInstructions ci, final boolean do_out) throws Exception {
+	public void start(final CompilerInstructions ci, final boolean do_out) throws Exception {
 		// 0. debugging
 		//NotImplementedException.raise();
 

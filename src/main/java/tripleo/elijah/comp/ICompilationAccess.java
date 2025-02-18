@@ -1,9 +1,9 @@
 package tripleo.elijah.comp;
 
-import tripleo.elijah.stages.deduce.*;
-import tripleo.elijah.stages.logging.*;
+import tripleo.elijah.stages.deduce.FunctionMapHook;
+import tripleo.elijah.stages.logging.ElLog;
 
-import java.util.*;
+import java.util.List;
 
 public interface ICompilationAccess {
 	void setPipelineLogic(final PipelineLogic pl);
@@ -12,7 +12,7 @@ public interface ICompilationAccess {
 
 	ElLog.Verbosity testSilence();
 
-	CompilationImpl getCompilation();
+	Compilation getCompilation();
 
 	void writeLogs();
 

@@ -1,21 +1,24 @@
 package tripleo.elijah.comp;
 
-import com.google.common.collect.*;
-import io.reactivex.rxjava3.functions.*;
-import org.jdeferred2.*;
-import org.jetbrains.annotations.*;
-import tripleo.elijah.comp.functionality.f202.*;
-import tripleo.elijah.stages.deduce.*;
-import tripleo.elijah.stages.gen_fn.*;
-import tripleo.elijah.stages.logging.*;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+import io.reactivex.rxjava3.functions.Consumer;
+import org.jdeferred2.DoneCallback;
+import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.comp.functionality.f202.F202;
+import tripleo.elijah.stages.deduce.FunctionMapHook;
+import tripleo.elijah.stages.gen_fn.DeferredObject2;
+import tripleo.elijah.stages.logging.ElLog;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 class DefaultCompilationAccess implements ICompilationAccess {
-	protected final CompilationImpl                            compilation;
+	protected final Compilation                            compilation;
 	private final   DeferredObject2<PipelineLogic, Void, Void> pipelineLogicDeferred = new DeferredObject2<>();
 
-	public DefaultCompilationAccess(final CompilationImpl aCompilation) {
+	public DefaultCompilationAccess(final Compilation aCompilation) {
 		compilation = aCompilation;
 	}
 
@@ -56,7 +59,7 @@ class DefaultCompilationAccess implements ICompilationAccess {
 	}
 
 	@Override
-	public CompilationImpl getCompilation() {
+	public Compilation getCompilation() {
 		return compilation;
 	}
 
