@@ -13,7 +13,6 @@ import org.jetbrains.annotations.Nullable;
 import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.lang.OS_Module;
 import tripleo.elijah.lang.ParserClosure;
-import tripleo.elijah.util.Helpers;
 import tripleo.elijah.util.TabbedOutputStream;
 import tripleo.elijah_fluffy.util.Eventual;
 
@@ -24,12 +23,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Out {
-	private final Compilation   compilation;
-	private final ParserClosure pc;
+	private final Compilation          compilation;
+	private final ParserClosure        pc;
+	private final Eventual<OS_ModuleX> ev;
 
-	public Out(final String fn, final Compilation compilation, final boolean do_out) {
+	public Out(final String fn, final Compilation compilation, final boolean do_out, final Eventual<OS_ModuleX> aXEventual) {
 		this.pc          = new ParserClosure(fn, compilation);
 		this.compilation = compilation;
+		if (aXEventual == null)
+		this.ev          = new Eventual<>();
+		else this.ev = aXEventual;
 	}
 
 	public record OS_ModuleX(OS_Module module, IOException exc) {
@@ -37,26 +40,31 @@ public class Out {
 
 	//@edu.umd.cs.findbugs.annotations.SuppressFBWarnings("NM_METHOD_NAMING_CONVENTION")
 	public void FinishModule() {
+		FinishModule(this.ev);
+	}
+
+	public void FinishModule(final Eventual<OS_ModuleX> aModuleXEventual) {
 		println("** FinishModule");
 
-		Eventual<OS_ModuleX> ev = new Eventual<>();
-		ev.resolve(new OS_ModuleX(pc.module, fmw()));
+		aModuleXEventual.resolve(new OS_ModuleX(pc.module, fmw()));
 
-		ev.onFail(X->{throw new Error();});
-		ev.then(pc->{compilation.put_module(pc.module.getFileName(), pc.module);});
+		aModuleXEventual.onFail(X -> {
+			throw new Error();
+		});
+		aModuleXEventual.then(pc -> {
+			compilation.put_module(pc.module.getFileName(), pc.module);
+		});
 	}
 
 	private @Nullable IOException fmw() {
 		try {
-			// pc.module.print_osi(tos);
-
-
 			final @NotNull SimpleDateFormat sdf      = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
 			final String                    filename = String.format("eljc-%s.out", sdf.format(new Date()));
 			final TabbedOutputStream        tos      = new TabbedOutputStream(new FileOutputStream(filename));
 
-			tos.put_string_ln(pc.module.getFileName());
-			Helpers.printXML(pc.module, tos);
+			final OS_Module module = pc.module;
+			tos.put_string_ln(module.getFileName());
+			// Helpers.printXML(module, tos);
 			tos.close();
 
 			return null;
