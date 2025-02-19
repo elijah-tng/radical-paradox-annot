@@ -10,11 +10,6 @@ package tripleo.elijah.comp;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
-import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observer;
-import io.reactivex.rxjava3.disposables.Disposable;
-import io.reactivex.rxjava3.subjects.ReplaySubject;
-import io.reactivex.rxjava3.subjects.Subject;
 import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.ci.CompilerInstructions;
 import tripleo.elijah.comp.functionality.f202.F202;
@@ -26,6 +21,7 @@ import tripleo.elijah.lang.OS_Package;
 import tripleo.elijah.lang.Qualident;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputTree;
 import tripleo.elijah.nextgen.query.Operation2;
+import tripleo.elijah.nextgen.query.QueryDatabase;
 import tripleo.elijah.stages.deduce.DeducePhase;
 import tripleo.elijah.stages.deduce.FunctionMapHook;
 import tripleo.elijah.stages.deduce.fluffy.i.FluffyComp;
@@ -38,37 +34,29 @@ import java.util.*;
 
 public abstract class Compilation {
 
-	public final  List<ElLog>             elLogs    = new LinkedList<ElLog>();
-	public final  CompilationConfig       cfg       = new CompilationConfig();
-	//
-	final         MOD                  mod = new MOD(this);
+	public final  CompilationConfig       cfg           = new CompilationConfig();
+	final         MOD                     mod           = new MOD(this);
+	private final CIS                     _cis          = new CIS();
+	private final Map<String, OS_Package> _packages     = new HashMap<String, OS_Package>();
+	private final USE                     use           = new USE(this);
+	private final QueryDatabase           _queryDatabase;
+	private final ErrSink                 errSink;
+	private final IO                      io;
+	public        PipelineLogic           pipelineLogic;
+	private       CompilationRunner       __cr;
+	private       CompilerInstructions    rootCI;
 	private final Pipeline                pipelines;
 	private final int                     _compilationNumber;
-	private final ErrSink                 errSink;
-	private final CIS                     _cis      = new CIS();
-	private final Map<String, OS_Package> _packages = new HashMap<String, OS_Package>();
-	private final USE                  use = new USE(this);
-	private final IO                   io;
-	//
-	//
-	//
-	public        PipelineLogic        pipelineLogic;
-	private       CompilationRunner    __cr;
-	private       CompilerInstructions rootCI;
-	private int _packageCode  = 1;
-	private int _classCode    = 101;
+	private       int                     _packageCode  = 1;
+	private       int                     _classCode    = 101;
+	private       int                     _functionCode = 1001;
 
-	//
-	private int _functionCode = 1001;
 	public Compilation(final ErrSink aErrSink, final IO aIO) {
 		errSink            = aErrSink;
 		io                 = aIO;
 		_compilationNumber = new Random().nextInt(Integer.MAX_VALUE);
 		pipelines          = new Pipeline(aErrSink);
-	}
-
-	public static boolean isGitlab_ci() {
-		return System.getenv("GITLAB_CI") != null;
+		_queryDatabase     = new QueryDatabase();
 	}
 
 	void hasInstructions(final @NotNull List<CompilerInstructions> cis) throws Exception {
@@ -101,7 +89,7 @@ public abstract class Compilation {
 	}
 
 	public static ElLog.Verbosity gitlabCIVerbosity() {
-		final boolean gitlab_ci = isGitlab_ci();
+		final boolean gitlab_ci = tripleo.elijah.comp.CompilationAlways.isGitlab_ci();
 		return gitlab_ci ? ElLog.Verbosity.SILENT : ElLog.Verbosity.VERBOSE;
 	}
 
@@ -131,6 +119,10 @@ public abstract class Compilation {
 		_cis.onNext(aci);
 	}
 
+	public void use(final @NotNull CompilerInstructions compilerInstructions, final boolean do_out) throws Exception {
+		use.use(compilerInstructions, do_out);    // NOTE Rust
+	}
+
 	public List<ClassStatement> findClass(final String string) {
 		final List<ClassStatement> l = new ArrayList<ClassStatement>();
 		for (final OS_Module module : mod.modules) {
@@ -139,10 +131,6 @@ public abstract class Compilation {
 			}
 		}
 		return l;
-	}
-
-	public void use(final @NotNull CompilerInstructions compilerInstructions, final boolean do_out) throws Exception {
-		use.use(compilerInstructions, do_out);    // NOTE Rust
 	}
 
 	public int errorCount() {
@@ -288,6 +276,10 @@ public abstract class Compilation {
 		// parent.put_module(_fileName, this);
 	}
 
+	public QueryDatabase queryDb() {
+		return this._queryDatabase;
+	}
+
 	static class MOD {
 		final         List<OS_Module>        modules = new ArrayList<OS_Module>();
 		private final Map<String, OS_Module> fn2m    = new HashMap<String, OS_Module>();
@@ -321,47 +313,40 @@ public abstract class Compilation {
 		boolean showTree = false;
 	}
 
-	static class CIS implements Observer<CompilerInstructions> {
-
-		private final Subject<CompilerInstructions> compilerInstructionsSubject = ReplaySubject.create();
-		CompilerInstructionsObserver _cio;
-
-		@Override
-		public void onSubscribe(@NonNull final Disposable d) {
-			compilerInstructionsSubject.onSubscribe(d);
-		}
-
-		@Override
-		public void onNext(@NonNull final CompilerInstructions aCompilerInstructions) {
-			compilerInstructionsSubject.onNext(aCompilerInstructions);
-		}
-
-		@Override
-		public void onError(@NonNull final Throwable e) {
-			compilerInstructionsSubject.onError(e);
-		}
-
-		@Override
-		public void onComplete() {
-			throw new IllegalStateException();
-			//compilerInstructionsSubject.onComplete();
-		}
-
-		public void almostComplete() {
-			_cio.almostComplete();
-		}
-
-		public void subscribe(final Observer<CompilerInstructions> aCio) {
-			compilerInstructionsSubject.subscribe(aCio);
-		}
-	}
-
-	public static class CompilationAlways {
-		@NotNull
-		public static String defaultPrelude() {
-			return "c";
-		}
-	}
+	// static class CIS implements Observer<CompilerInstructions> {
+	//
+	// 	private final Subject<CompilerInstructions> compilerInstructionsSubject = ReplaySubject.create();
+	// 	CompilerInstructionsObserver _cio;
+	//
+	// 	@Override
+	// 	public void onSubscribe(@NonNull final Disposable d) {
+	// 		compilerInstructionsSubject.onSubscribe(d);
+	// 	}
+	//
+	// 	@Override
+	// 	public void onNext(@NonNull final CompilerInstructions aCompilerInstructions) {
+	// 		compilerInstructionsSubject.onNext(aCompilerInstructions);
+	// 	}
+	//
+	// 	@Override
+	// 	public void onError(@NonNull final Throwable e) {
+	// 		compilerInstructionsSubject.onError(e);
+	// 	}
+	//
+	// 	@Override
+	// 	public void onComplete() {
+	// 		throw new IllegalStateException();
+	// 		//compilerInstructionsSubject.onComplete();
+	// 	}
+	//
+	// 	public void almostComplete() {
+	// 		_cio.almostComplete();
+	// 	}
+	//
+	// 	public void subscribe(final Observer<CompilerInstructions> aCio) {
+	// 		compilerInstructionsSubject.subscribe(aCio);
+	// 	}
+	// }
 }
 
 //

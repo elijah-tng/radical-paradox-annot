@@ -4,6 +4,7 @@
 
 import antlr.*;
 import antlr.collections.impl.BitSet;
+import org.jetbrains.annotations.NotNull;
 import tripleo.elijah.Out;
 import tripleo.elijah.contexts.*;
 import tripleo.elijah.lang.*;
@@ -53,512 +54,510 @@ public ElijjahParser(final ParserSharedInputState state) {
 		final long[] data = { 2L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_1() {
 		final long[] data = { 1125907959939138L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_2() {
 		final long[] data = { -219902359568526L, 1973610486956031L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_3() {
 		final long[] data = { 71837665500642626L, 1970861705986048L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_4() {
 		final long[] data = { -8796093022350L, 8726823789658111L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_5() {
 		final long[] data = { 65056427525308738L, 1970324836974592L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_6() {
 		final long[] data = { 1125907965182274L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_7() {
 		final long[] data = { -219902359568526L, 1971411463700479L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_8() {
 		final long[] data = { -8796127035534L, 1973610486956031L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_9() {
 		final long[] data = { 459008L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_10() {
 		final long[] data = { 17190879232L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_11() {
 		final long[] data = { 71820073314598210L, 1970861705986048L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_12() {
 		final long[] data = { 22020096L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_13() {
 		final long[] data = { 12582912L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_14() {
 		final long[] data = { 8388608L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_15() {
 		final long[] data = { 105553118363904L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_16() {
 		final long[] data = { 1125907959939072L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_17() {
 		final long[] data = { 42402048L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_18() {
 		final long[] data = { 16777216L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_19() {
 		final long[] data = { 11025664L, 2145583104L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_20() {
 		final long[] data = { -72057576427586256L, 2147483647L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_21() {
 		final long[] data = { 71837665500642560L, 1689386729275392L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_22() {
 		final long[] data = { 1610645760L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_23() {
 		final long[] data = { 65056427567710464L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_24() {
 		final long[] data = { 56048712874492160L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_25() {
 		final long[] data = { 71908034278833408L, 1689386729275392L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_26() {
 		final long[] data = { 65055912171634944L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_27() {
 		final long[] data = { 65055912171634944L, 1688849860263936L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_28() {
 		final long[] data = { 62839262339185920L, 1970861705986048L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_29() {
 		final long[] data = { 56049228270567680L, 1970324836974592L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_30() {
 		final long[] data = { 65056427525308672L, 1970324836974592L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_31() {
 		final long[] data = { 71820073314598144L, 1970861705986048L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_32() {
 		final long[] data = { 56049228270567680L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_33() {
 		final long[] data = { 65056427525308672L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_34() {
 		final long[] data = { 34013440L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_35() {
 		final long[] data = { 65056427525308672L, 1688849860263936L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_36() {
 		final long[] data = { 56048712874492160L, 1688849860263936L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_37() {
 		final long[] data = { 56048712874493184L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_38() {
 		final long[] data = { 38034314348232960L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_39() {
 		final long[] data = { 65056436115259714L, 1970324836974592L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_40() {
 		final long[] data = { 65056436115243330L, 1970324836974592L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_41() {
 		final long[] data = { 71908034278833474L, 1970861705986048L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_42() {
 		final long[] data = { 65056436115259648L, 1688849860263936L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_43() {
 		final long[] data = { 65056436115243264L, 1688849860263936L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_44() {
 		final long[] data = { 8602517504L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_45() {
 		final long[] data = { 56189450773889792L, 1688849860263936L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_46() {
 		final long[] data = { 7643255091543296L, 536869011456L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_47() {
 		final long[] data = { -55407122092327632L, 536870911999L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_48() {
 		final long[] data = { 16650454363061504L, 536869011456L, 0L, 0L};
 		return data;
 	}
-		
+
 	private static final long[] mk_tokenSet_49() {
 		final long[] data = { -79164837200014L, 8726823789658111L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_50() {
 		final long[] data = { 7635008754302208L, 536869011456L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_51() {
 		final long[] data = { -55407119944843984L, 1086626725887L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_52() {
 		final long[] data = { 7643255108320512L, 536869011456L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_53() {
 		final long[] data = { -79164871213198L, 8726823789658111L, 0L, 0L};
 		return data;
 	}
-		
+
 	private static final long[] mk_tokenSet_54() {
 		final long[] data = { 7643255628414208L, 536869011456L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_55() {
 		final long[] data = { -55407121555456720L, 536870911999L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_56() {
 		final long[] data = { 16650454899932416L, 536869011456L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_57() {
 		final long[] data = { -237503106777808L, 1086626725887L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_58() {
 		final long[] data = { -55407119407973072L, 1086626725887L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_59() {
 		final long[] data = { 7643255645191424L, 536869011456L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_60() {
 		final long[] data = { -219910920733392L, 6756498952683519L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_61() {
 		final long[] data = { 71837665500642560L, 6755949194969088L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_62() {
 		final long[] data = { 16668047085976832L, 536869011456L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_63() {
 		final long[] data = { 8598323200L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_64() {
 		final long[] data = { 71837674090577664L, 1689386729275392L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_65() {
 		final long[] data = { 7638857045032192L, 536869011456L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_66() {
 		final long[] data = { -55411520138838736L, 536870911999L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_67() {
 		final long[] data = { 16646056316550400L, 536869011456L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_68() {
 		final long[] data = { -241901153288912L, 1971411463700479L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_69() {
 		final long[] data = { -55411517991355088L, 1086626725887L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_70() {
 		final long[] data = { 7637208314461440L, 536869011456L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_71() {
 		final long[] data = { -55395574535881424L, 1086626725887L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_72() {
 		final long[] data = { -55395576683365072L, 536870911999L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_73() {
 		final long[] data = { 7654800517545216L, 536869011456L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_74() {
 		final long[] data = { 16661999772024064L, 536869011456L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_75() {
 		final long[] data = { -225958234686160L, 1689936486989823L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_76() {
 		final long[] data = { 27802880L, 2145583104L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_77() {
 		final long[] data = { -7001148919054544L, 1688852007747583L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_78() {
 		final long[] data = { 71820081904533248L, 1970861705986048L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_79() {
 		final long[] data = { 4194304L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_80() {
 		final long[] data = { -144115187941638144L, 15L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_81() {
 		final long[] data = { -8796093022350L, 9007199254740991L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_82() {
 		final long[] data = { 11025664L, 4293066752L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_83() {
 		final long[] data = { -72057576444363472L, 2147483647L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_84() {
 		final long[] data = { 15219968L, 2145583104L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_85() {
 		final long[] data = { -219910920733392L, 8445348812947455L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_86() {
 		final long[] data = { 17179869184L, 3584L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_87() {
 		final long[] data = { 35184372089088L, 280377075695616L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_88() {
 		final long[] data = { -55415366282052304L, 1086626725887L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_89() {
 		final long[] data = { -64422567684276944L, 536870911999L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_90() {
 		final long[] data = { 16650454363061504L, 549753913344L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_91() {
 		final long[] data = { 16668047085976832L, 549753913344L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_92() {
 		final long[] data = { -142L, 9007199254740991L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_93() {
 		final long[] data = { 256L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_94() {
 		final long[] data = { 35192968855808L, 142936511610880L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_95() {
 		final long[] data = { 35184376283392L, 246290604621824L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_96() {
 		final long[] data = { -79164871213198L, 2112148952055807L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_97() {
 		final long[] data = { -219902359568526L, 2112148952055807L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_98() {
 		final long[] data = { 35184372089088L, 246290604621824L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_99() {
 		final long[] data = { 35192966218496L, 140737488355328L, 0L, 0L};
 		return data;
 	}
-	
+
 	private static final long[] mk_tokenSet_100() {
 		final long[] data = { 8594128896L, 0L};
 		return data;
 	}
-	
-	public final void program() throws RecognitionException, TokenStreamException {
 
-		final ParserClosure pc = out.closure();
-		final ModuleContext mctx=new ModuleContext(out.module());
-		out.module().setContext(mctx);cur=mctx;
+	public final void program(final ParserClosure aParserClosure, final @NotNull OS_Module aModule) throws RecognitionException, TokenStreamException {
+		final ModuleContext mctx =new ModuleContext(aModule);
+		aModule.setContext(mctx);cur = mctx;
 		IndexingStatement idx=null;
 		OS_Package pkg;
 
@@ -568,11 +567,11 @@ public ElijjahParser(final ParserSharedInputState state) {
 			case LITERAL_indexing:
 			{
 				if ( inputState.guessing==0 ) {
-					idx=pc.indexingStatement();
+					idx= aParserClosure.indexingStatement();
 				}
 				indexingStatement(idx);
 				if ( inputState.guessing==0 ) {
-					pc.module.addIndexingStatement(idx);
+					aModule.addIndexingStatement(idx);
 				}
 				break;
 			}
@@ -603,7 +602,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 					xy=qualident();
 					opt_semi();
 					if ( inputState.guessing==0 ) {
-						pkg=pc.defaultPackageName(xy);cur=new PackageContext(cur, pkg);pkg.setContext((PackageContext) cur);
+						pkg = aParserClosure.defaultPackageName(xy);cur =new PackageContext(cur, pkg);pkg.setContext((PackageContext) cur);
 					}
 					break;
 				}
@@ -614,7 +613,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 				case LITERAL_import:
 				case LITERAL_alias:
 				{
-					programStatement(pc, out.module());
+					programStatement(aParserClosure, aModule);
 					opt_semi();
 					break;
 				}
@@ -627,7 +626,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 			match(Token.EOF_TYPE);
 			if ( inputState.guessing==0 ) {
-				out.module().postConstruct();out.FinishModule();
+				aModule.postConstruct();out.FinishModule();
 			}
 		}
 		catch (final RecognitionException ex) {
@@ -639,7 +638,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void indexingStatement(
             final IndexingStatement idx
 	) throws RecognitionException, TokenStreamException {
@@ -680,7 +679,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final Qualident  qualident() throws RecognitionException, TokenStreamException {
 		final Qualident q;
 
@@ -720,7 +719,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 		}
 		return q;
 	}
-	
+
 	public final void opt_semi() throws RecognitionException, TokenStreamException {
 
 
@@ -746,7 +745,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void programStatement(
             final ProgramClosure pc, final OS_Element cont
 	) throws RecognitionException, TokenStreamException {
@@ -821,7 +820,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final ExpressionList  expressionList() throws RecognitionException, TokenStreamException {
 		final ExpressionList el;
 
@@ -859,7 +858,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 		}
 		return el;
 	}
-	
+
 	public final IExpression  constantValue() throws RecognitionException, TokenStreamException {
 		IExpression e;
 
@@ -923,7 +922,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 		}
 		return e;
 	}
-	
+
 	public final IdentExpression  ident() throws RecognitionException, TokenStreamException {
 		IdentExpression id;
 
@@ -947,7 +946,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 		}
 		return id;
 	}
-	
+
 	public final ClassStatement  classStatement(
             final OS_Element parent, final Context cctx, final List<AnnotationClause> as
 	) throws RecognitionException, TokenStreamException {
@@ -1148,7 +1147,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 		}
 		return cls;
 	}
-	
+
 	public final TypeNameList  typeNameList2() throws RecognitionException, TokenStreamException {
 		final TypeNameList cr;
 
@@ -1186,7 +1185,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 		}
 		return cr;
 	}
-	
+
 	public final void classInheritance_(
             final ClassInheritance ci
 	) throws RecognitionException, TokenStreamException {
@@ -1224,7 +1223,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void classInheritanceRuby(
             final ClassInheritance ci
 	) throws RecognitionException, TokenStreamException {
@@ -1243,7 +1242,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void classScope(
             final ClassStatement cr
 	) throws RecognitionException, TokenStreamException {
@@ -1359,7 +1358,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void invariantStatement(
             final InvariantStatement cr
 	) throws RecognitionException, TokenStreamException {
@@ -1410,7 +1409,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void classDefinition_interface(
             final ClassBuilder cb
 	) throws RecognitionException, TokenStreamException {
@@ -1483,7 +1482,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void classStatement2(
             final BaseScope sc
 	) throws RecognitionException, TokenStreamException {
@@ -1540,7 +1539,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final AnnotationClause  annotation_clause() throws RecognitionException, TokenStreamException {
 		final AnnotationClause a;
 
@@ -1606,7 +1605,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 		}
 		return a;
 	}
-	
+
 	public final void classDefinition_normal(
             final ClassBuilder cb
 	) throws RecognitionException, TokenStreamException {
@@ -1680,7 +1679,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void classDefinition_struct(
             final ClassBuilder cb
 	) throws RecognitionException, TokenStreamException {
@@ -1729,7 +1728,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void classDefinition_signature(
             final ClassBuilder cb
 	) throws RecognitionException, TokenStreamException {
@@ -1778,7 +1777,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void classDefinition_abstract(
             final ClassBuilder cb
 	) throws RecognitionException, TokenStreamException {
@@ -1881,7 +1880,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void classDefinition_inheritance(
             final ClassBuilder cb
 	) throws RecognitionException, TokenStreamException {
@@ -1918,7 +1917,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void classScope2(
             final ClassScope cr
 	) throws RecognitionException, TokenStreamException {
@@ -2020,7 +2019,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void classScope2_signature(
             final ClassScope cr
 	) throws RecognitionException, TokenStreamException {
@@ -2104,7 +2103,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void invariantStatement2(
             final ClassScope sc
 	) throws RecognitionException, TokenStreamException {
@@ -2155,7 +2154,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
+
 	public final void classScope2_interface(
             final ClassScope cr
 	) throws RecognitionException, TokenStreamException {
@@ -2251,8 +2250,8 @@ public ElijjahParser(final ParserSharedInputState state) {
 			}
 		}
 	}
-	
-	
+
+
 	public static final String[] _tokenNames = {
 		"<0>",
 		"EOF",
@@ -2380,7 +2379,7 @@ public ElijjahParser(final ParserSharedInputState state) {
 		"EXPONENT",
 		"FLOAT_SUFFIX"
 	};
-	
+
 	public final void docstrings(
             final Documentable sc
 	) throws RecognitionException, TokenStreamException {
@@ -9654,5 +9653,5 @@ inputState.guessing--;
 		}
 	}
 	public static final BitSet _tokenSet_100 = new BitSet(mk_tokenSet_100());
-	
+
 	}
