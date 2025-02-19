@@ -55,10 +55,6 @@ public class OS_Module implements OS_Element, OS_Container {
 		return null;
 	}
 
-	public void finish() {
-//		parent.put_module(_fileName, this);
-	}
-
 	public String getFileName() {
 		return _fileName;
 	}
