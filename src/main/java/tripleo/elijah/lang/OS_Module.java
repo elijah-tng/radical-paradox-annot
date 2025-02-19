@@ -35,77 +35,77 @@ import java.util.Stack;
 
 public class OS_Module implements OS_Element, OS_Container {
 
-    private final @NotNull                      List<ModuleItem>     items          = new ArrayList<>();
-    private final @NotNull                      Attached             _a             = new Attached();
-    private final @NotNull                      EntryPointList       entryPoints    = new EntryPointList();
-    private final                               Stack<Qualident>     packageNames_q = new Stack<>();
-    private @org.jetbrains.annotations.Nullable OS_Module            prelude;
-    private                                     Compilation          parent;
-    private                                     LibraryStatementPart lsp;
-    private                                     String               _fileName;
-    private                                     IndexingStatement    indexingStatement;
+	private final @NotNull List<ModuleItem>     items          = new ArrayList<>();
+	private final @NotNull Attached             _a             = new Attached();
+	private final @NotNull EntryPointList       entryPoints    = new EntryPointList();
+	private final          Stack<Qualident>     packageNames_q = new Stack<>();
+	private @Nullable      OS_Module            prelude;
+	private                Compilation          parent;
+	private                LibraryStatementPart lsp;
+	private                String               _fileName;
+	private                IndexingStatement    indexingStatement;
 
-    public @org.jetbrains.annotations.Nullable OS_Element findClass(final String aClassName) {
-        for (final ModuleItem item : items) {
-            if (item instanceof ClassStatement) {
-                if (((ClassStatement) item).getName().equals(aClassName))
-                    return item;
-            }
-        }
-        return null;
-    }
+	public @Nullable OS_Element findClass(final String aClassName) {
+		for (final ModuleItem item : items) {
+			if (item instanceof ClassStatement) {
+				if (((ClassStatement) item).getName().equals(aClassName))
+					return item;
+			}
+		}
+		return null;
+	}
 
-    public void finish() {
+	public void finish() {
 //		parent.put_module(_fileName, this);
-    }
+	}
 
-    public String getFileName() {
-        return _fileName;
-    }
+	public String getFileName() {
+		return _fileName;
+	}
 
-    public void setFileName(final String fileName) {
-        this._fileName = fileName;
-    }
+	public void setFileName(final String fileName) {
+		this._fileName = fileName;
+	}
 
-    public @NotNull Collection<ModuleItem> getItems() {
-        return items;
-    }
+	public @NotNull Collection<ModuleItem> getItems() {
+		return items;
+	}
 
-    public boolean hasClass(final String className) {
-        for (final ModuleItem item : items) {
-            if (item instanceof ClassStatement) {
-                if (((ClassStatement) item).getName().equals(className))
-                    return true;
-            }
-        }
-        return false;
-    }
+	public boolean hasClass(final String className) {
+		for (final ModuleItem item : items) {
+			if (item instanceof ClassStatement) {
+				if (((ClassStatement) item).getName().equals(className))
+					return true;
+			}
+		}
+		return false;
+	}
 
-    @Override // OS_Container
-    public @NotNull List<OS_Element2> items() {
-        final Collection<ModuleItem> c = Collections2.filter(getItems(), new Predicate<ModuleItem>() {
-            @Override
-            public boolean apply(@org.jetbrains.annotations.Nullable final ModuleItem input) {
-                final boolean b = input instanceof OS_Element2;
-                return b;
-            }
-        });
-        final ArrayList<OS_Element2> a = new ArrayList<OS_Element2>();
-        for (final ModuleItem moduleItem : c) {
-            a.add((OS_Element2) moduleItem);
-        }
-        return a;
-    }
+	@Override // OS_Container
+	public @NotNull List<OS_Element2> items() {
+		final Collection<ModuleItem> c = Collections2.filter(getItems(), new Predicate<ModuleItem>() {
+			@Override
+			public boolean apply(@Nullable final ModuleItem input) {
+				final boolean b = input instanceof OS_Element2;
+				return b;
+			}
+		});
+		final ArrayList<OS_Element2> a = new ArrayList<OS_Element2>();
+		for (final ModuleItem moduleItem : c) {
+			a.add((OS_Element2) moduleItem);
+		}
+		return a;
+	}
 
-    @Override
-    public void add(final OS_Element anElement) {
-        if (!(anElement instanceof ModuleItem)) {
-            parent.getErrSink().info(String.format(
-                    "[Module#add] not adding %s to OS_Module", anElement.getClass().getName()));
-            return; // TODO FalseAddDiagnostic
-        }
-        items.add((ModuleItem) anElement);
-    }
+	@Override
+	public void add(final OS_Element anElement) {
+		if (!(anElement instanceof ModuleItem)) {
+			parent.getErrSink().info(String.format(
+				"[Module#add] not adding %s to OS_Module", anElement.getClass().getName()));
+			return; // TODO FalseAddDiagnostic
+		}
+		items.add((ModuleItem) anElement);
+	}
 
 //	public void modify_namespace(Qualident q, NamespaceModify aModification) { // TODO aModification is unused
 ////		NotImplementedException.raise();
@@ -126,124 +126,124 @@ public class OS_Module implements OS_Element, OS_Container {
 //*/
 //	}
 
-    @Override
-    public void visitGen(final @NotNull ElElementVisitor visit) {
-        visit.addModule(this); // visitModule
-    }
+	@Override
+	public void visitGen(final @NotNull ElElementVisitor visit) {
+		visit.addModule(this); // visitModule
+	}
 
-    /**
-     * A module has no parent which is an element (not even a package - this is not Java).<br>
-     * If you want the Compilation use the member {@link #parent}
-     *
-     * @return null
-     */
-    /**
-     * @ ensures \result == null
-     */
-    @Override
-    public @org.jetbrains.annotations.Nullable OS_Element getParent() {
-        return null;
-    }
+	/**
+	 * A module has no parent which is an element (not even a package - this is not Java).<br>
+	 * If you want the Compilation use the member {@link #parent}
+	 *
+	 * @return null
+	 */
+	/**
+	 * @ ensures \result == null
+	 */
+	@Override
+	public @Nullable OS_Element getParent() {
+		return null;
+	}
 
-    public void setParent(@NotNull final Compilation parent) {
-        this.parent = parent;
-    }
+	public void setParent(@NotNull final Compilation parent) {
+		this.parent = parent;
+	}
 
-    @Override
-    public Context getContext() {
-        return _a._context;
-    }
+	@Override
+	public Context getContext() {
+		return _a._context;
+	}
 
-    /**
-     * The last package declared in the source file
-     *
-     * @return a new OS_Package instance or default_package
-     */
-    @NotNull
-    public OS_Package pullPackageName() {
-        if (packageNames_q.empty())
-            return OS_Package.default_package;
-        return parent.makePackage(packageNames_q.peek());
-    }
+	/**
+	 * The last package declared in the source file
+	 *
+	 * @return a new OS_Package instance or default_package
+	 */
+	@NotNull
+	public OS_Package pullPackageName() {
+		if (packageNames_q.empty())
+			return OS_Package.default_package;
+		return parent.makePackage(packageNames_q.peek());
+	}
 
-    public void pushPackageName(final Qualident xyz) {
-        packageNames_q.push(xyz);
-    }
+	public void pushPackageName(final Qualident xyz) {
+		packageNames_q.push(xyz);
+	}
 
-    /**
-     * Get a class by name. Must not be qualified. Wont return a {@link NamespaceStatement}
-     * Same as {@link #findClass(String)}
-     *
-     * @param name the class we are looking for
-     * @return either the class or null
-     */
-    @Nullable
-    public ClassStatement getClassByName(final String name) {
-        for (final ModuleItem item : items) {
-            if (item instanceof ClassStatement)
-                if (((ClassStatement) item).getName().equals(name))
-                    return (ClassStatement) item;
-        }
-        return null;
-    }
+	/**
+	 * Get a class by name. Must not be qualified. Wont return a {@link NamespaceStatement}
+	 * Same as {@link #findClass(String)}
+	 *
+	 * @param name the class we are looking for
+	 * @return either the class or null
+	 */
+	@Nullable
+	public ClassStatement getClassByName(final String name) {
+		for (final ModuleItem item : items) {
+			if (item instanceof ClassStatement)
+				if (((ClassStatement) item).getName().equals(name))
+					return (ClassStatement) item;
+		}
+		return null;
+	}
 
-    public void postConstruct() {
-        final FluffyComp fc = getContext().module().getCompilation().getFluffy();
+	public void postConstruct() {
+		final FluffyComp fc = getContext().module().getCompilation().getFluffy();
 
-        final FluffyModule fm = fc.module(this);
+		final FluffyModule fm = fc.module(this);
 
-        fm.find_multiple_items(fc);
-        fm.find_all_entry_points();
-    }
+		fm.find_multiple_items(fc);
+		fm.find_all_entry_points();
+	}
 
-    public void setContext(final ModuleContext mctx) {
-        _a.setContext(mctx);
-    }
+	public void setContext(final ModuleContext mctx) {
+		_a.setContext(mctx);
+	}
 
-    @Override
-    public void addDocString(final Token s1) {
-        throw new NotImplementedException();
-    }
+	@Override
+	public void addDocString(final Token s1) {
+		throw new NotImplementedException();
+	}
 
-    public void remove(final ClassStatement cls) {
-        items.remove(cls);
-    }
+	public void remove(final ClassStatement cls) {
+		items.remove(cls);
+	}
 
-    public void addIndexingStatement(final IndexingStatement indexingStatement) {
-        this.indexingStatement = indexingStatement;
-    }
+	public void addIndexingStatement(final IndexingStatement indexingStatement) {
+		this.indexingStatement = indexingStatement;
+	}
 
-    public boolean isPrelude() {
-        return prelude == this;
-    }
+	public boolean isPrelude() {
+		return prelude == this;
+	}
 
-    public LibraryStatementPart getLsp() {
-        return lsp;
-    }
+	public LibraryStatementPart getLsp() {
+		return lsp;
+	}
 
-    public void setLsp(final @NotNull LibraryStatementPart aLsp) {
-        lsp = aLsp;
-    }
+	public void setLsp(final @NotNull LibraryStatementPart aLsp) {
+		lsp = aLsp;
+	}
 
-    public Compilation getCompilation() {
-        return parent;
-    }
+	public Compilation getCompilation() {
+		return parent;
+	}
 
-    public @NotNull Attached get_a() {
-        return _a;
-    }
+	public @NotNull Attached get_a() {
+		return _a;
+	}
 
-    public @NotNull EntryPointList getEntryPoints() {
-        return entryPoints;
-    }
+	public @NotNull EntryPointList getEntryPoints() {
+		return entryPoints;
+	}
 
-    public @org.jetbrains.annotations.Nullable OS_Module getPrelude() {
-        return prelude;
-    }
+	public @Nullable OS_Module getPrelude() {
+		return prelude;
+	}
 
-    public void setPrelude(@org.jetbrains.annotations.Nullable OS_Module aPrelude) {
-        prelude = aPrelude;
-    }
+	public void setPrelude(@Nullable OS_Module aPrelude) {
+		prelude = aPrelude;
+	}
 }
 
 //
