@@ -48,8 +48,9 @@ public class Out {
 
 		aModuleXEventual.resolve(new OS_ModuleX(pc.module, fmw()));
 
-		aModuleXEventual.onFail(X -> {
-			throw new Error();
+		aModuleXEventual.onFail(Sexc -> {
+			// throw new Error();
+			pc.module.parent.getErrSink().exception(Sexc);
 		});
 		aModuleXEventual.then(pc -> {
 			compilation.put_module(pc.module.getFileName(), pc.module);
