@@ -10,7 +10,6 @@ package tripleo.elijah.comp;
 
 import org.jetbrains.annotations.*;
 import tripleo.elijah.gen.*;
-import tripleo.elijah.gen.nodes.*;
 import tripleo.util.*;
 import tripleo.util.buffer.*;
 

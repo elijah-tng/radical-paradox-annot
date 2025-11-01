@@ -11,9 +11,9 @@ package tripleo.elijah.stages.gen_fn;
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.lang.*;
 import tripleo.elijah.stages.deduce.ClassInvocation;
-import tripleo.elijah.stages.deduce.DeduceTypes2;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
 import tripleo.elijah.util.Holder;
 import tripleo.elijah.work.WorkJob;
@@ -22,7 +22,7 @@ import tripleo.elijah.work.WorkManager;
 /**
  * Created 5/31/21 2:26 AM
  */
-public class WlGenerateDefaultCtor implements WorkJob {
+public class WlGenerateDefaultCtor extends _WlGenerator<BaseGeneratedFunction> implements WorkJob {
 	private final GenerateFunctions     generateFunctions;
 	private final FunctionInvocation    functionInvocation;
 	private       boolean               _isDone = false;
@@ -76,7 +76,7 @@ public class WlGenerateDefaultCtor implements WorkJob {
 			ci.resolvePromise().done(new DoneCallback<GeneratedClass>() {
 				@Override
 				public void onDone(final @NotNull GeneratedClass result) {
-					gf.setCode(generateFunctions.module.parent.nextFunctionCode());
+					gf.setCode(getCodable().nextFunctionCode());
 					gf.setClass(result);
 					result.constructors.put(cd, gf);
 				}
@@ -108,6 +108,11 @@ public class WlGenerateDefaultCtor implements WorkJob {
 
 	public BaseGeneratedFunction getResult() {
 		return Result;
+	}
+
+	@Override
+	public Compilation.Codeable getCodable() {
+		return null;
 	}
 }
 

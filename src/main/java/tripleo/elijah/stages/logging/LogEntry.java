@@ -22,7 +22,7 @@ public class LogEntry {
 		message = aS;
 	}
 
-	enum Level {
+	public enum Level {
 		INFO, ERROR
 	}
 }

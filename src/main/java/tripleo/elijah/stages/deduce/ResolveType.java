@@ -58,7 +58,7 @@ public class ResolveType {
 			case SystemInteger: {
 				@NotNull final String typeName = type.getBType().name();
 				assert typeName.equals("SystemInteger");
-				OS_Module prelude = module.prelude;
+				OS_Module prelude = module.getPrelude();
 				if (prelude == null) // README Assume `module' IS prelude
 					prelude = module;
 				final LookupResultList lrl  = prelude.getContext().lookup(typeName);
@@ -80,7 +80,7 @@ public class ResolveType {
 			case String_: {
 				@NotNull final String typeName = type.getBType().name();
 				assert typeName.equals("String_");
-				OS_Module prelude = module.prelude;
+				OS_Module prelude = module.getPrelude();
 				if (prelude == null) // README Assume `module' IS prelude
 					prelude = module;
 				final LookupResultList lrl  = prelude.getContext().lookup("ConstString"); // TODO not sure about String
@@ -102,7 +102,7 @@ public class ResolveType {
 			case SystemCharacter: {
 				@NotNull final String typeName = type.getBType().name();
 				assert typeName.equals("SystemCharacter");
-				OS_Module prelude = module.prelude;
+				OS_Module prelude = module.getPrelude();
 				if (prelude == null) // README Assume `module' IS prelude
 					prelude = module;
 				final LookupResultList lrl  = prelude.getContext().lookup("SystemCharacter");
@@ -122,7 +122,7 @@ public class ResolveType {
 				break;
 			}
 			case Boolean: {
-				OS_Module prelude = module.prelude;
+				OS_Module prelude = module.getPrelude();
 				if (prelude == null) // README Assume `module' IS prelude
 					prelude = module;
 				final LookupResultList     lrl  = prelude.getContext().lookup("Boolean");

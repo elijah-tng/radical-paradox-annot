@@ -9,8 +9,8 @@
 package tripleo.elijah.stages.gen_fn;
 
 import org.jetbrains.annotations.NotNull;
+import org.junit.Ignore;
 import tripleo.elijah.comp.*;
-import tripleo.elijah.comp.internal.CompilationImpl;
 import tripleo.elijah.lang.*;
 import tripleo.elijah.stages.deduce.*;
 import tripleo.elijah.stages.instructions.IdentIA;
@@ -24,18 +24,19 @@ import static org.easymock.EasyMock.*;
 /**
  * Created 3/4/21 3:53 AM
  */
+@Ignore
 public class TestIdentNormal {
 
 //	@Test(expected = IllegalStateException.class) // TODO proves nothing
 	public void test() {
-		final Compilation comp = new CompilationImpl(new StdErrSink(), new IO());
-		final OS_Module mod = new OS_Module();//mock(OS_Module.class);
+		final Compilation comp = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
+		final OS_Module       mod  = new OS_Module();//mock(OS_Module.class);
 		mod.setParent(comp);
 		final FunctionDef fd = mock(FunctionDef.class);
 		final Context ctx1 = mock(Context.class);
 		final Context ctx2 = mock(Context.class);
 
-		final ElLog.Verbosity verbosity1 = new CompilationImpl(new StdErrSink(), new IO()).gitlabCIVerbosity();
+		final ElLog.Verbosity verbosity1 = Compilation.gitlabCIVerbosity();
 		final AccessBus ab = new AccessBus(comp);
 		final PipelineLogic pl = new PipelineLogic(ab);
 		final GeneratePhase generatePhase = new GeneratePhase(verbosity1, pl);
@@ -90,13 +91,13 @@ public class TestIdentNormal {
 
 //	@Test // TODO just a mess
 	public void test2() {
-		final Compilation comp = new CompilationImpl(new StdErrSink(), new IO());
-		final OS_Module mod = new OS_Module();
+		final Compilation comp = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
+		final OS_Module       mod  = new OS_Module();
 		mod.setParent(comp);
 //		FunctionDef fd = mock(FunctionDef.class);
 		final Context ctx2 = mock(Context.class);
 
-		final ElLog.Verbosity verbosity1 = new CompilationImpl(new StdErrSink(), new IO()).gitlabCIVerbosity();
+		final ElLog.Verbosity verbosity1 = Compilation.gitlabCIVerbosity();
 		final AccessBus ab = new AccessBus(comp);
 		final PipelineLogic pl = new PipelineLogic(ab);
 		final GeneratePhase generatePhase = new GeneratePhase(verbosity1, pl);

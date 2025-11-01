@@ -12,6 +12,7 @@ import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.lang.*;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
@@ -26,7 +27,7 @@ import java.util.List;
 /**
  * Created 7/3/21 6:24 AM
  */
-public class WlGenerateCtor implements WorkJob {
+public class WlGenerateCtor extends _WlGenerator<GeneratedConstructor> implements WorkJob {
 	private final GenerateFunctions    generateFunctions;
 	private final FunctionInvocation   functionInvocation;
 	private final IdentExpression      constructorName;
@@ -147,7 +148,7 @@ public class WlGenerateCtor implements WorkJob {
 			ci.resolvePromise().done(new DoneCallback<GeneratedClass>() {
 				@Override
 				public void onDone(final GeneratedClass result) {
-					gf.setCode(generateFunctions.module.parent.nextFunctionCode());
+					gf.setCode(getCodable().nextFunctionCode());
 					gf.setClass(result);
 					result.constructors.put(cd, gf);
 				}
@@ -160,6 +161,11 @@ public class WlGenerateCtor implements WorkJob {
 		}
 
 		_isDone = true;
+	}
+
+	@Override
+	public Compilation.Codeable getCodable() {
+		return generateFunctions.module.getCompilation().codable();
 	}
 
 	private boolean getPragma(final String aAuto_construct) {
