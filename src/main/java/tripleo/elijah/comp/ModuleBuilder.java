@@ -1,8 +1,9 @@
 package tripleo.elijah.comp;
 
-import tripleo.elijah.contexts.*;
-import tripleo.elijah.lang.*;
-import tripleo.elijah.nextgen.query.*;
+import tripleo.elijah.contexts.ModuleContext;
+import tripleo.elijah.lang.OS_Module;
+import tripleo.elijah.nextgen.query.Mode;
+import tripleo.elijah.nextgen.query.Operation2;
 
 public class ModuleBuilder {
 	//		private final Compilation compilation;
@@ -35,7 +36,7 @@ public class ModuleBuilder {
 
 		assert p.mode() == Mode.SUCCESS;
 
-		mod.prelude = p.success();
+		mod.setPrelude(p.success());
 
 		return this;
 	}

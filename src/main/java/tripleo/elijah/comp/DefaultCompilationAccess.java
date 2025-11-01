@@ -1,18 +1,21 @@
 package tripleo.elijah.comp;
 
-import com.google.common.collect.*;
-import io.reactivex.rxjava3.functions.*;
-import org.jdeferred2.*;
-import org.jetbrains.annotations.*;
-import tripleo.elijah.comp.functionality.f202.*;
-import tripleo.elijah.stages.deduce.*;
-import tripleo.elijah.stages.gen_fn.*;
-import tripleo.elijah.stages.logging.*;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
+import io.reactivex.rxjava3.functions.Consumer;
+import org.jdeferred2.DoneCallback;
+import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.comp.functionality.f202.F202;
+import tripleo.elijah.stages.deduce.FunctionMapHook;
+import tripleo.elijah.stages.gen_fn.DeferredObject2;
+import tripleo.elijah.stages.logging.ElLog;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 class DefaultCompilationAccess implements ICompilationAccess {
-	protected final Compilation                                compilation;
+	protected final Compilation                            compilation;
 	private final   DeferredObject2<PipelineLogic, Void, Void> pipelineLogicDeferred = new DeferredObject2<>();
 
 	public DefaultCompilationAccess(final Compilation aCompilation) {
@@ -34,7 +37,7 @@ class DefaultCompilationAccess implements ICompilationAccess {
 
 	@Override
 	public void setPipelineLogic(final PipelineLogic pl) {
-		compilation.pipelineLogic = pl;
+		compilation.setPipelineLogic(pl);
 
 		pipelineLogicDeferred.resolve(pl);
 	}
@@ -64,7 +67,7 @@ class DefaultCompilationAccess implements ICompilationAccess {
 	public void writeLogs() {
 		final boolean silent = testSilence() == ElLog.Verbosity.SILENT;
 
-		writeLogs(silent, compilation.elLogs);
+		writeLogs(silent, compilation.getElLogs());
 	}
 
 	@Override
@@ -79,7 +82,7 @@ class DefaultCompilationAccess implements ICompilationAccess {
 
 	@Override
 	public Stages getStage() {
-		return getCompilation().cfg.stage;
+		return getCompilation().getCfg().stage;
 	}
 
 	private void writeLogs(final boolean aSilent, final List<ElLog> aLogs) {

@@ -1,0 +1,218 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>tripleo.elijah</groupId>
+    <artifactId>automatic-anno</artifactId>
+    <packaging>pom</packaging>
+    <version>automatic-anno.2025-02</version>
+
+    <!-- TODO 12/31 naming here -->
+    <name>eljc-almost-automatic-anno</name>
+    <url>http://git.sr.ht/~tripleo/automatic-anno--not-really</url>
+
+
+    <modules>
+        <module>annotation-processing</module>
+        <module>annotation-user</module>
+        <module>annotations</module>
+    </modules>
+
+    <dependencies>
+        <!--
+        <dependency>
+            <groupId>com.github.elijah-team.lombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>master-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        -->
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.11.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.17.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.16</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.16</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>5.14.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--
+        <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+            <version>4.7.3</version>
+        </dependency>
+        -->
+
+        <!--
+        <dependency>
+            <groupId>com.github.JCTools.JCTools</groupId>
+            <artifactId>jctools-core</artifactId>
+            <version>v4.0.5</version>
+        </dependency>
+        -->
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+<!--
+        <repository>
+            <id>maven_central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+-->
+    </repositories>
+
+    <properties>
+        <project.build.outputTimestamp>1</project.build.outputTimestamp>
+
+        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <downloadSources>true</downloadSources>
+
+        <jacoco.version>0.8.9</jacoco.version>
+        <guava.version>33.3.1-jre</guava.version>
+
+        <buffers.version>0.0.3</buffers.version>
+        <range.version>0.0.3b</range.version>
+
+        <jdeferred.version>2.0.0</jdeferred.version>
+
+        <!-- for edu 2022.2 -->
+        <!-- <kotlin.version>1.7.10</kotlin.version> -->
+        <kotlin.version>1.9.22</kotlin.version>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-help-plugin</artifactId>
+                    <version>3.2.0</version>
+                    <executions>
+                        <execution>
+                            <id>show-profiles</id>
+                            <phase>compile</phase>
+                            <goals>
+                                <goal>active-profiles</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.17.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>no-tests</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+        </profile>
+        <profile>
+            <id>eclipse</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok-maven-plugin</artifactId>
+                        <version>1.18.20.0</version>
+                        <executions>
+                            <execution>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>delombok</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.eclipse.sisu</groupId>
+                        <artifactId>sisu-maven-plugin</artifactId>
+                        <version>0.3.5</version>
+                        <executions>
+                            <execution>
+                                <id>generate-index</id>
+                                <goals>
+                                    <goal>main-index</goal>
+                                    <goal>test-index</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>plus</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+            <dependencies>
+                <!-- https://search.maven.org/artifact/fr.inria.gforge.spoon.labs/gumtree-spoon-ast-diff/1.69/jar-->
+                <dependency>
+                    <groupId>fr.inria.gforge.spoon.labs</groupId>
+                    <artifactId>gumtree-spoon-ast-diff</artifactId>
+                    <version>1.69</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+</project>

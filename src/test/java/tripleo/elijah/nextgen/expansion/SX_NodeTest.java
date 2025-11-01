@@ -1,17 +1,9 @@
 package tripleo.elijah.nextgen.expansion;
 
 import junit.framework.TestCase;
-import tripleo.elijah.comp.AccessBus;
-import tripleo.elijah.comp.IO;
-import tripleo.elijah.comp.PipelineLogic;
-import tripleo.elijah.comp.StdErrSink;
-import tripleo.elijah.comp.internal.CompilationImpl;
+import tripleo.elijah.comp.*;
 import tripleo.elijah.lang.OS_Module;
-import tripleo.elijah.nextgen.model.SM_ClassBody;
-import tripleo.elijah.nextgen.model.SM_ClassDeclaration;
-import tripleo.elijah.nextgen.model.SM_ClassInheritance;
-import tripleo.elijah.nextgen.model.SM_ClassSubtype;
-import tripleo.elijah.nextgen.model.SM_Name;
+import tripleo.elijah.nextgen.model.*;
 import tripleo.elijah.stages.gen_c.GenerateC;
 import tripleo.elijah.stages.gen_generic.GenerateFiles;
 import tripleo.elijah.stages.gen_generic.OutputFileFactoryParams;
@@ -26,7 +18,7 @@ public class SX_NodeTest extends TestCase {
 	public void testFullText() {
 		final StdErrSink      errSink       = new StdErrSink();
 		final IO              io            = new IO();
-		final CompilationImpl comp          = new CompilationImpl(errSink, io);
+		final Compilation comp          = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(errSink, io);
 		final AccessBus       ab            = new AccessBus(comp);
 		final PipelineLogic   pipelineLogic = new PipelineLogic(ab);
 		final OS_Module mod = comp.moduleBuilder()

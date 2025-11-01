@@ -14,34 +14,38 @@
  */
 package tripleo.elijah.lang;
 
-import antlr.*;
-import com.google.common.base.*;
-import com.google.common.collect.*;
-import org.eclipse.jdt.annotation.Nullable;
-import org.jetbrains.annotations.*;
-import tripleo.elijah.ci.*;
-import tripleo.elijah.comp.*;
-import tripleo.elijah.contexts.*;
-import tripleo.elijah.entrypoints.*;
-import tripleo.elijah.lang2.*;
-import tripleo.elijah.stages.deduce.fluffy.i.*;
-import tripleo.elijah.util.*;
+import antlr.Token;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Collections2;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import tripleo.elijah.ci.LibraryStatementPart;
+import tripleo.elijah.comp.Compilation;
+import tripleo.elijah.contexts.ModuleContext;
+import tripleo.elijah.entrypoints.EntryPointList;
+import tripleo.elijah.lang2.ElElementVisitor;
+import tripleo.elijah.stages.deduce.fluffy.i.FluffyComp;
+import tripleo.elijah.stages.deduce.fluffy.i.FluffyModule;
+import tripleo.elijah.util.NotImplementedException;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Stack;
 
 public class OS_Module implements OS_Element, OS_Container {
 
-	public final @NotNull                      List<ModuleItem>     items          = new ArrayList<ModuleItem>();
-	public final @NotNull                      Attached             _a             = new Attached();
-	public final @NotNull                      EntryPointList       entryPoints    = new EntryPointList();
-	private final                              Stack<Qualident>     packageNames_q = new Stack<Qualident>();
-	public @org.jetbrains.annotations.Nullable OS_Module            prelude;
-	public                                     Compilation          parent;
-	private                                    LibraryStatementPart lsp;
-	private                                    String               _fileName;
-	private                                    IndexingStatement    indexingStatement;
+	private final @NotNull List<ModuleItem>     items          = new ArrayList<>();
+	private final @NotNull Attached             _a             = new Attached();
+	private final @NotNull EntryPointList       entryPoints    = new EntryPointList();
+	private final          Stack<Qualident>     packageNames_q = new Stack<>();
+	private @Nullable      OS_Module            prelude;
+	private                Compilation          parent;
+	private                LibraryStatementPart lsp;
+	private                String               _fileName;
+	private                IndexingStatement    indexingStatement;
 
-	public @org.jetbrains.annotations.Nullable OS_Element findClass(final String aClassName) {
+	public @Nullable OS_Element findClass(final String aClassName) {
 		for (final ModuleItem item : items) {
 			if (item instanceof ClassStatement) {
 				if (((ClassStatement) item).getName().equals(aClassName))
@@ -49,10 +53,6 @@ public class OS_Module implements OS_Element, OS_Container {
 			}
 		}
 		return null;
-	}
-
-	public void finish() {
-//		parent.put_module(_fileName, this);
 	}
 
 	public String getFileName() {
@@ -81,7 +81,7 @@ public class OS_Module implements OS_Element, OS_Container {
 	public @NotNull List<OS_Element2> items() {
 		final Collection<ModuleItem> c = Collections2.filter(getItems(), new Predicate<ModuleItem>() {
 			@Override
-			public boolean apply(@org.jetbrains.annotations.Nullable final ModuleItem input) {
+			public boolean apply(@Nullable final ModuleItem input) {
 				final boolean b = input instanceof OS_Element2;
 				return b;
 			}
@@ -97,7 +97,7 @@ public class OS_Module implements OS_Element, OS_Container {
 	public void add(final OS_Element anElement) {
 		if (!(anElement instanceof ModuleItem)) {
 			parent.getErrSink().info(String.format(
-					"[Module#add] not adding %s to OS_Module", anElement.getClass().getName()));
+				"[Module#add] not adding %s to OS_Module", anElement.getClass().getName()));
 			return; // TODO FalseAddDiagnostic
 		}
 		items.add((ModuleItem) anElement);
@@ -137,7 +137,7 @@ public class OS_Module implements OS_Element, OS_Container {
 	 * @ ensures \result == null
 	 */
 	@Override
-	public @org.jetbrains.annotations.Nullable OS_Element getParent() {
+	public @Nullable OS_Element getParent() {
 		return null;
 	}
 
@@ -155,7 +155,8 @@ public class OS_Module implements OS_Element, OS_Container {
 	 *
 	 * @return a new OS_Package instance or default_package
 	 */
-	@NotNull public OS_Package pullPackageName() {
+	@NotNull
+	public OS_Package pullPackageName() {
 		if (packageNames_q.empty())
 			return OS_Package.default_package;
 		return parent.makePackage(packageNames_q.peek());
@@ -222,6 +223,22 @@ public class OS_Module implements OS_Element, OS_Container {
 
 	public Compilation getCompilation() {
 		return parent;
+	}
+
+	public @NotNull Attached get_a() {
+		return _a;
+	}
+
+	public @NotNull EntryPointList getEntryPoints() {
+		return entryPoints;
+	}
+
+	public @Nullable OS_Module getPrelude() {
+		return prelude;
+	}
+
+	public void setPrelude(@Nullable OS_Module aPrelude) {
+		prelude = aPrelude;
 	}
 }
 

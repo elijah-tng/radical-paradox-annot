@@ -1,18 +1,24 @@
 package tripleo.elijah.nextgen.inputtree;
 
-import org.jetbrains.annotations.*;
-import tripleo.elijah.comp.*;
-import tripleo.elijah.entrypoints.*;
-import tripleo.elijah.lang.*;
-import tripleo.elijah.stages.deduce.*;
-import tripleo.elijah.stages.gen_fn.*;
-import tripleo.elijah.stages.logging.*;
-import tripleo.elijah.util.*;
-import tripleo.elijah.work.*;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.comp.Coder;
+import tripleo.elijah.comp.PipelineLogic;
+import tripleo.elijah.entrypoints.EntryPointList;
+import tripleo.elijah.lang.OS_Module;
+import tripleo.elijah.stages.deduce.DeducePhase;
+import tripleo.elijah.stages.gen_fn.GenerateFunctions;
+import tripleo.elijah.stages.gen_fn.GeneratedNode;
+import tripleo.elijah.stages.logging.ElLog;
+import tripleo.elijah.util.NotImplementedException;
+import tripleo.elijah.util.Stupidity;
+import tripleo.elijah.work.WorkManager;
 
-import java.util.*;
-import java.util.function.*;
-import java.util.stream.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class EIT_ModuleList {
 	private final List<OS_Module> mods;
@@ -29,7 +35,7 @@ public class EIT_ModuleList {
 
 	public void process__PL(final Function<OS_Module, GenerateFunctions> ggf, final PipelineLogic pipelineLogic) {
 		for (final OS_Module mod : mods) {
-			final @NotNull EntryPointList epl = mod.entryPoints;
+			final @NotNull EntryPointList epl = mod.getEntryPoints();
 
 			if (epl.size() == 0) {
 				continue;
