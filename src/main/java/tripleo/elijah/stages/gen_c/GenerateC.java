@@ -52,7 +52,7 @@ public class GenerateC implements CodeGenerator, GenerateFiles {
 
 	public GenerateC(final @NotNull OutputFileFactoryParams p) {
 		errSink = p.getErrSink();
-		LOG     = new ElLog(p.getModFileName(), p.getVerbosity(), PHASE);
+		LOG     = new GenerateFunctions.ElLog2(p.getModFileName(), p.getVerbosity(), PHASE);
 		//
 		p.addLog(LOG);
 	}

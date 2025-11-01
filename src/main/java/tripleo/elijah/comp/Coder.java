@@ -1,11 +1,14 @@
 package tripleo.elijah.comp;
 
-import org.jetbrains.annotations.*;
-import tripleo.elijah.lang.*;
+import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.lang.ClassStatement;
+import tripleo.elijah.lang.FunctionDef;
+import tripleo.elijah.lang.OS_Module;
 import tripleo.elijah.stages.gen_fn.*;
 
-import java.util.*;
-import java.util.stream.*;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Coder {
 
@@ -64,16 +67,16 @@ public class Coder {
 
 	public void codeNodeFunction(@NotNull final BaseGeneratedFunction generatedFunction, final OS_Module mod) {
 		if (generatedFunction.getCode() == 0)
-			generatedFunction.setCode(mod.parent.nextFunctionCode());
+			generatedFunction.setCode(mod.getCompilation().codable().nextFunctionCode());
 	}
 
 	public void codeNodeClass(@NotNull final GeneratedClass generatedClass, final OS_Module mod) {
 		if (generatedClass.getCode() == 0)
-			generatedClass.setCode(mod.parent.nextClassCode());
+			generatedClass.setCode(mod.getCompilation().codable().nextClassCode());
 	}
 
 	public void codeNodeNamespace(@NotNull final GeneratedNamespace generatedNamespace, final OS_Module mod) {
 		if (generatedNamespace.getCode() == 0)
-			generatedNamespace.setCode(mod.parent.nextClassCode());
+			generatedNamespace.setCode(mod.getCompilation().codable().nextClassCode());
 	}
 }

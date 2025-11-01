@@ -32,17 +32,7 @@ import tripleo.elijah.stages.deduce.declarations.DeferredMemberFunction;
 import tripleo.elijah.stages.deduce.zero.IZero;
 import tripleo.elijah.stages.deduce.zero.Zero_FuncExprType;
 import tripleo.elijah.stages.gen_fn.*;
-import tripleo.elijah.stages.instructions.ConstTableIA;
-import tripleo.elijah.stages.instructions.FnCallArgs;
-import tripleo.elijah.stages.instructions.IdentIA;
-import tripleo.elijah.stages.instructions.Instruction;
-import tripleo.elijah.stages.instructions.InstructionArgument;
-import tripleo.elijah.stages.instructions.InstructionName;
-import tripleo.elijah.stages.instructions.IntegerIA;
-import tripleo.elijah.stages.instructions.Label;
-import tripleo.elijah.stages.instructions.LabelIA;
-import tripleo.elijah.stages.instructions.ProcIA;
-import tripleo.elijah.stages.instructions.VariableTableType;
+import tripleo.elijah.stages.instructions.*;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.util.Helpers;
 import tripleo.elijah.util.NotImplementedException;
@@ -50,11 +40,7 @@ import tripleo.elijah.work.WorkJob;
 import tripleo.elijah.work.WorkList;
 import tripleo.elijah.work.WorkManager;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created 9/15/20 12:51 PM
@@ -94,7 +80,7 @@ public class DeduceTypes2 {
 		this.module  = module;
 		this.phase   = phase;
 		this.errSink = module.getCompilation().getErrSink();
-		this.LOG     = new ElLog(module.getFileName(), verbosity, PHASE);
+		this.LOG     = new GenerateFunctions.ElLog2(module.getFileName(), verbosity, PHASE);
 		//
 		phase.addLog(LOG);
 	}
@@ -1267,7 +1253,7 @@ public class DeduceTypes2 {
 					case SystemInteger: {
 						@NotNull final String typeName = type.getBType().name();
 						assert typeName.equals("SystemInteger");
-						OS_Module prelude = module.prelude;
+						OS_Module prelude = module.getPrelude();
 						if (prelude == null) // README Assume `module' IS prelude
 							prelude = module;
 						final LookupResultList lrl  = prelude.getContext().lookup(typeName);
@@ -1289,7 +1275,7 @@ public class DeduceTypes2 {
 					case String_: {
 						@NotNull final String typeName = type.getBType().name();
 						assert typeName.equals("String_");
-						OS_Module prelude = module.prelude;
+						OS_Module prelude = module.getPrelude();
 						if (prelude == null) // README Assume `module' IS prelude
 							prelude = module;
 						final LookupResultList lrl  = prelude.getContext().lookup("ConstString"); // TODO not sure about String
@@ -1311,7 +1297,7 @@ public class DeduceTypes2 {
 					case SystemCharacter: {
 						@NotNull final String typeName = type.getBType().name();
 						assert typeName.equals("SystemCharacter");
-						OS_Module prelude = module.prelude;
+						OS_Module prelude = module.getPrelude();
 						if (prelude == null) { // README Assume `module' IS prelude
 							prelude = module;
 							assert module != null;
@@ -1334,7 +1320,7 @@ public class DeduceTypes2 {
 						break;
 					}
 					case Boolean: {
-						OS_Module prelude = module.prelude;
+						OS_Module prelude = module.getPrelude();
 						if (prelude == null) // README Assume `module' IS prelude
 							prelude = module;
 						final LookupResultList     lrl  = prelude.getContext().lookup("Boolean");

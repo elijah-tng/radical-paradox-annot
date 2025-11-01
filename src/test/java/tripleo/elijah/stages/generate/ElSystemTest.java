@@ -15,18 +15,17 @@ import tripleo.elijah.comp.AccessBus;
 import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.comp.IO;
 import tripleo.elijah.comp.StdErrSink;
-import tripleo.elijah.comp.internal.CompilationImpl;
 import tripleo.elijah.util.Helpers;
 
 public class ElSystemTest {
 
-	ElSystem    sys;
+	ElSystem        sys;
 	Compilation c;
 	private AccessBus ab;
 
 	@Before
 	public void setUp() throws Exception {
-		c  = new CompilationImpl(new StdErrSink(), new IO());
+		c  = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 		ab = new AccessBus(c);
 
 		final String f = "test/basic1/backlink3";

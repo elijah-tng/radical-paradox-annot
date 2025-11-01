@@ -1,0 +1,8 @@
+package tripleo.elijah.automatic_anno.roaster;
+
+import java.lang.annotation.*;
+
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.SOURCE)
+public @interface BuilderProperty {
+}

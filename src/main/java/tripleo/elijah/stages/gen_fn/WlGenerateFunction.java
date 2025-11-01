@@ -10,6 +10,7 @@ package tripleo.elijah.stages.gen_fn;
 
 import org.jdeferred2.DoneCallback;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.lang.FunctionDef;
 import tripleo.elijah.lang.NamespaceStatement;
 import tripleo.elijah.lang.OS_Element;
@@ -22,7 +23,7 @@ import tripleo.elijah.work.WorkManager;
 /**
  * Created 5/16/21 12:46 AM
  */
-public class WlGenerateFunction implements WorkJob {
+public class WlGenerateFunction extends _WlGenerator<GeneratedFunction> implements WorkJob {
 	private final FunctionDef functionDef;
 	private final GenerateFunctions generateFunctions;
 	private final FunctionInvocation functionInvocation;
@@ -62,7 +63,7 @@ public class WlGenerateFunction implements WorkJob {
 					@Override
 					public void onDone(final GeneratedNamespace result) {
 						if (result.getFunction(functionDef) == null) {
-							gf.setCode(generateFunctions.module.parent.nextFunctionCode());
+							gf.setCode(getCodable().nextFunctionCode());
 							result.addFunction(functionDef, gf);
 						}
 						gf.setClass(result);
@@ -74,7 +75,7 @@ public class WlGenerateFunction implements WorkJob {
 					@Override
 					public void onDone(final GeneratedClass result) {
 						if (result.getFunction(functionDef) == null) {
-							gf.setCode(generateFunctions.module.parent.nextFunctionCode());
+							gf.setCode(getCodable().nextFunctionCode());
 							result.addFunction(functionDef, gf);
 						}
 						gf.setClass(result);
@@ -97,6 +98,11 @@ public class WlGenerateFunction implements WorkJob {
 
 	public GeneratedFunction getResult() {
 		return result;
+	}
+
+	@Override
+	public Compilation.Codeable getCodable() {
+		return generateFunctions.module.getCompilation().codable();
 	}
 }
 

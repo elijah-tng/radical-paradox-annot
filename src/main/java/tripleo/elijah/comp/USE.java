@@ -1,23 +1,39 @@
 package tripleo.elijah.comp;
 
-import antlr.*;
-import org.jetbrains.annotations.*;
-import tripleo.elijah.ci.*;
-import tripleo.elijah.comp.diagnostic.*;
-import tripleo.elijah.comp.queries.*;
-import tripleo.elijah.diagnostic.*;
-import tripleo.elijah.lang.*;
-import tripleo.elijah.nextgen.query.*;
-import tripleo.elijah.util.*;
+import antlr.ANTLRException;
+import antlr.RecognitionException;
+import antlr.TokenStreamException;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.Out;
+import tripleo.elijah.ci.CompilerInstructions;
+import tripleo.elijah.ci.GenerateStatement;
+import tripleo.elijah.ci.LibraryStatementPart;
+import tripleo.elijah.comp.diagnostic.ExceptionDiagnostic;
+import tripleo.elijah.comp.diagnostic.FileNotFoundDiagnostic;
+import tripleo.elijah.comp.queries.QuerySourceFileToModule;
+import tripleo.elijah.comp.queries.QuerySourceFileToModuleParams;
+import tripleo.elijah.diagnostic.Diagnostic;
+import tripleo.elijah.lang.OS_Module;
+import tripleo.elijah.lang.StringExpression;
+import tripleo.elijah.nextgen.query.Mode;
+import tripleo.elijah.nextgen.query.Operation2;
+import tripleo.elijah.nextgen.query.QueryDatabase;
+import tripleo.elijah.util.Helpers;
+import tripleo.elijjah.ElijjahLexer;
+import tripleo.elijjah.ElijjahParser;
 
-import java.io.*;
-import java.util.*;
-import java.util.regex.*;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
 
-class USE {
+public class USE {
 	private static final FilenameFilter         accept_source_files = (directory, file_name) -> {
 		final boolean matches = Pattern.matches(".+\\.elijah$", file_name)
-		  || Pattern.matches(".+\\.elijjah$", file_name);
+			|| Pattern.matches(".+\\.elijjah$", file_name);
 		return matches;
 	};
 	private final        Compilation            c;
@@ -99,9 +115,9 @@ class USE {
 	}
 
 	private Operation2<OS_Module> parseElijjahFile(final @NotNull File f,
-	                                               final @NotNull String file_name,
-	                                               final boolean do_out,
-	                                               final @NotNull LibraryStatementPart lsp) {
+																								 final @NotNull String file_name,
+																								 final boolean do_out,
+																								 final @NotNull LibraryStatementPart lsp) {
 		System.out.printf("   %s%n", f.getAbsolutePath());
 
 		if (f.exists()) {
@@ -110,18 +126,18 @@ class USE {
 			if (om.mode() == Mode.SUCCESS) {
 				final OS_Module mm = om.success();
 
-				//assert mm.getLsp() == null;
-				//assert mm.prelude == null;
+				// assert mm.getLsp() == null;
+				// assert mm.prelude == null;
 
 				if (mm.getLsp() == null) {
 					// TODO we dont know which prelude to find yet
-					final Operation2<OS_Module> pl = findPrelude(Compilation.CompilationAlways.defaultPrelude());
+					final Operation2<OS_Module> pl = findPrelude(CompilationAlways.defaultPrelude());
 
 					// NOTE Go. infectious. tedious. also slightly lazy
 					assert pl.mode() == Mode.SUCCESS;
 
 					mm.setLsp(lsp);
-					mm.prelude = pl.success();
+					mm.setPrelude(pl.success());
 				}
 
 				return Operation2.success(mm);
@@ -146,20 +162,54 @@ class USE {
 		}
 
 		switch (om.mode()) {
-		case SUCCESS:
-			return Operation2.success(om.success());
-		case FAILURE:
-			final Exception e = om.failure();
-			errSink.exception(e);
-			return Operation2.failure(new ExceptionDiagnostic(e));
-		default:
-			throw new IllegalStateException("Unexpected value: " + om.mode());
+			case SUCCESS:
+				return Operation2.success(om.success());
+			case FAILURE:
+				final Exception e = om.failure();
+				errSink.exception(e);
+				return Operation2.failure(new ExceptionDiagnostic(e));
+			default:
+				throw new IllegalStateException("Unexpected value: " + om.mode());
 		}
 	}
 
 	private Operation<OS_Module> parseFile_(final String f, final InputStream s, final boolean do_out) throws RecognitionException, TokenStreamException {
-		final QuerySourceFileToModuleParams qp = new QuerySourceFileToModuleParams(s, f, do_out);
-		return new QuerySourceFileToModule(qp, c).calculate();
+		final QuerySourceFileToModuleParams qp   = new QuerySourceFileToModuleParams(s, f, do_out);
+		final QuerySourceFileToModule       sftm = new QuerySourceFileToModule(qp, c);
+		final Operation<OS_Module>          calculated;
+
+		if (sftm.resultIsPresent()) {
+			final QueryDatabase db = c.queryDb();
+
+			return Operation.success((OS_Module)db.getKey(sftm.getHash(), OS_Module.class));
+
+		} else
+		{
+			Operation<OS_Module> result;
+			final String         f1      = qp.sourceFilename;
+			final InputStream    s1      = qp.inputStream;
+			final boolean        do_out1 = qp.do_out;
+
+			final ElijjahLexer lexer = new ElijjahLexer(s1);
+			lexer.setFilename(f1);
+			final ElijjahParser parser = new ElijjahParser(lexer);
+			parser.out = new Out(f1, c, do_out1, qp.getEventual());
+			final Out out = parser.out;
+			parser.setFilename(f1);
+			try {
+				parser.program(out.closure(), out.module());
+				final OS_Module module = parser.out.module();
+				result = Operation.success(module);
+			} catch (RecognitionException aE) {
+				result     = Operation.failure(aE);
+				parser.out = null;
+				result     = Operation.failure(aE);
+			} catch (TokenStreamException aE) {
+				result = Operation.failure(aE);
+			}
+			calculated = result;
+		}
+		return calculated;
 	}
 
 	public Operation<OS_Module> realParseElijjahFile(final String f, final @NotNull File file, final boolean do_out) throws Exception {

@@ -2,20 +2,11 @@ package tripleo.elijah.nextgen.expansion;
 
 import junit.framework.TestCase;
 import org.jetbrains.annotations.NotNull;
+import tripleo.elijah.comp.Compilation;
 import tripleo.elijah.comp.IO;
 import tripleo.elijah.comp.StdErrSink;
-import tripleo.elijah.comp.internal.CompilationImpl;
-import tripleo.elijah.nextgen.model.SM_ClassBody;
-import tripleo.elijah.nextgen.model.SM_ClassDeclaration;
-import tripleo.elijah.nextgen.model.SM_ClassInheritance;
-import tripleo.elijah.nextgen.model.SM_ClassSubtype;
-import tripleo.elijah.nextgen.model.SM_Name;
-import tripleo.elijah.nextgen.outputstatement.EG_Naming;
-import tripleo.elijah.nextgen.outputstatement.EG_SequenceStatement;
-import tripleo.elijah.nextgen.outputstatement.EG_SingleStatement;
-import tripleo.elijah.nextgen.outputstatement.EG_Statement;
-import tripleo.elijah.nextgen.outputstatement.EG_SyntheticStatement;
-import tripleo.elijah.nextgen.outputstatement.EX_Rule;
+import tripleo.elijah.nextgen.model.*;
+import tripleo.elijah.nextgen.outputstatement.*;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputFile;
 import tripleo.elijah.nextgen.outputtree.EOT_OutputTree;
 import tripleo.elijah.nextgen.small.ES_Symbol;
@@ -31,7 +22,7 @@ public class SX_NodeTest2 extends TestCase {
 	public void testFullText() {
 		final StdErrSink      errSink = new StdErrSink();
 		final IO              io      = new IO();
-		final CompilationImpl comp    = new CompilationImpl(errSink, io);
+		final Compilation comp    = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(errSink, io);
 //		final AccessBus       ab            = new AccessBus(comp);
 //		final PipelineLogic   pipelineLogic = new PipelineLogic(ab);
 //		final OS_Module mod = comp.moduleBuilder()

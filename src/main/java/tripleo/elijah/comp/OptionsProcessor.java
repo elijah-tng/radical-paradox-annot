@@ -1,6 +1,6 @@
 package tripleo.elijah.comp;
 
-import java.util.*;
+import java.util.List;
 
 @FunctionalInterface
 public interface OptionsProcessor {
