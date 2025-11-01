@@ -17,32 +17,12 @@ import tripleo.elijah.nextgen.model.SM_ClassDeclaration;
 import tripleo.elijah.nextgen.model.SM_Node;
 import tripleo.elijah.stages.deduce.ClassInvocation;
 import tripleo.elijah.stages.deduce.FunctionInvocation;
-import tripleo.elijah.stages.gen_fn.BaseGeneratedFunction;
-import tripleo.elijah.stages.gen_fn.BaseTableEntry;
-import tripleo.elijah.stages.gen_fn.ConstantTableEntry;
-import tripleo.elijah.stages.gen_fn.GeneratedClass;
-import tripleo.elijah.stages.gen_fn.GeneratedConstructor;
-import tripleo.elijah.stages.gen_fn.GeneratedContainer;
-import tripleo.elijah.stages.gen_fn.GeneratedContainerNC;
-import tripleo.elijah.stages.gen_fn.GeneratedFunction;
-import tripleo.elijah.stages.gen_fn.GeneratedNamespace;
-import tripleo.elijah.stages.gen_fn.GeneratedNode;
-import tripleo.elijah.stages.gen_fn.IdentTableEntry;
-import tripleo.elijah.stages.gen_fn.ProcTableEntry;
-import tripleo.elijah.stages.gen_fn.TypeTableEntry;
-import tripleo.elijah.stages.gen_fn.VariableTableEntry;
+import tripleo.elijah.stages.gen_fn.*;
 import tripleo.elijah.stages.gen_generic.CodeGenerator;
 import tripleo.elijah.stages.gen_generic.GenerateFiles;
 import tripleo.elijah.stages.gen_generic.GenerateResult;
 import tripleo.elijah.stages.gen_generic.OutputFileFactoryParams;
-import tripleo.elijah.stages.instructions.ConstTableIA;
-import tripleo.elijah.stages.instructions.FnCallArgs;
-import tripleo.elijah.stages.instructions.IdentIA;
-import tripleo.elijah.stages.instructions.Instruction;
-import tripleo.elijah.stages.instructions.InstructionArgument;
-import tripleo.elijah.stages.instructions.IntegerIA;
-import tripleo.elijah.stages.instructions.ProcIA;
-import tripleo.elijah.stages.instructions.VariableTableType;
+import tripleo.elijah.stages.instructions.*;
 import tripleo.elijah.stages.logging.ElLog;
 import tripleo.elijah.util.BufferTabbedOutputStream;
 import tripleo.elijah.util.Helpers;
@@ -72,7 +52,7 @@ public class GenerateC implements CodeGenerator, GenerateFiles {
 
 	public GenerateC(final @NotNull OutputFileFactoryParams p) {
 		errSink = p.getErrSink();
-		LOG     = new ElLog(p.getModFileName(), p.getVerbosity(), PHASE);
+		LOG     = new GenerateFunctions.ElLog2(p.getModFileName(), p.getVerbosity(), PHASE);
 		//
 		p.addLog(LOG);
 	}

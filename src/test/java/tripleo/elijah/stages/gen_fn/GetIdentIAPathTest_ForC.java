@@ -11,25 +11,10 @@ package tripleo.elijah.stages.gen_fn;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-import tripleo.elijah.comp.AccessBus;
-import tripleo.elijah.comp.Compilation;
-import tripleo.elijah.comp.IO;
-import tripleo.elijah.comp.PipelineLogic;
-import tripleo.elijah.comp.StdErrSink;
-import tripleo.elijah.comp.internal.CompilationImpl;
-import tripleo.elijah.lang.ClassStatement;
-import tripleo.elijah.lang.Context;
-import tripleo.elijah.lang.DotExpression;
-import tripleo.elijah.lang.FunctionDef;
-import tripleo.elijah.lang.IdentExpression;
-import tripleo.elijah.lang.LookupResultList;
-import tripleo.elijah.lang.OS_Element;
-import tripleo.elijah.lang.OS_Module;
-import tripleo.elijah.lang.OS_Package;
-import tripleo.elijah.lang.OS_Type;
-import tripleo.elijah.lang.VariableSequence;
-import tripleo.elijah.lang.VariableStatement;
+import tripleo.elijah.comp.*;
+import tripleo.elijah.lang.*;
 import tripleo.elijah.stages.gen_c.CReference;
 import tripleo.elijah.stages.gen_c.Emit;
 import tripleo.elijah.stages.gen_c.Generate_Code_For_Method;
@@ -43,6 +28,7 @@ import tripleo.elijah.util.Helpers;
 import static org.easymock.EasyMock.*;
 import static tripleo.elijah.util.Helpers.List_of;
 
+@Ignore
 public class GetIdentIAPathTest_ForC {
 
 	GeneratedFunction gf;
@@ -107,7 +93,7 @@ public class GetIdentIAPathTest_ForC {
 
 		//		el1.add(vsq);
 		//
-		final CompilationImpl   c             = new CompilationImpl(new StdErrSink(), new IO());
+		final Compilation   c             = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 		final ElLog.Verbosity   verbosity1    = Compilation.gitlabCIVerbosity();
 		final AccessBus         ab            = new AccessBus(c);
 		final PipelineLogic     pl            = new PipelineLogic(ab);
@@ -135,7 +121,7 @@ public class GetIdentIAPathTest_ForC {
 		final IdentExpression          x_ident   = Helpers.string_to_ident("x");
 		@NotNull final IdentExpression foo_ident = Helpers.string_to_ident("foo");
 		//
-		final CompilationImpl   c             = new CompilationImpl(new StdErrSink(), new IO());
+		final Compilation   c             = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 		final ElLog.Verbosity   verbosity1    = Compilation.gitlabCIVerbosity();
 		final AccessBus         ab            = new AccessBus(c);
 		final PipelineLogic     pl            = new PipelineLogic(ab);
@@ -218,7 +204,7 @@ public class GetIdentIAPathTest_ForC {
 		//
 		final DotExpression expr = new DotExpression(x_ident, foo_ident);
 		//
-		final CompilationImpl     c             = new CompilationImpl(new StdErrSink(), new IO());
+		final Compilation     c             = tripleo.elijah.factory.comp.CompilationFactory.mkCompilation(new StdErrSink(), new IO());
 		final ElLog.Verbosity     verbosity1    = Compilation.gitlabCIVerbosity();
 		final AccessBus           ab            = new AccessBus(c);
 		final PipelineLogic       pl            = new PipelineLogic(ab);

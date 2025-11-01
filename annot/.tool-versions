@@ -1,0 +1,6 @@
+#####java zulu-17.54.21
+####graalvm 19.2.1
+#####22.3.3-java11
+######idk what any of the above means
+java graalvm-community-17.0.9
+direnv 2.35.0

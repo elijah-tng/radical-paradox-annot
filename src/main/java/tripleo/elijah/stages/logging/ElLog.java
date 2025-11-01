@@ -14,11 +14,12 @@ import java.util.List;
 /**
  * Created 8/3/21 3:46 AM
  */
+@SuppressWarnings("unused")
 public class ElLog {
-	private final String fileName;
-	private final Verbosity verbose;
-	private final String phase;
 	private final List<LogEntry> entries = new ArrayList<>();
+	private final String         fileName;
+	private final String         phase;
+	private final Verbosity      verbose;
 
 	public enum Verbosity {
 		SILENT, VERBOSE
@@ -26,34 +27,61 @@ public class ElLog {
 
 	public ElLog(final String aFileName, final Verbosity aVerbose, final String aPhase) {
 		fileName = aFileName;
-		verbose = aVerbose;
-		phase = aPhase;
+		verbose  = aVerbose;
+		phase    = aPhase;
 	}
 
 	public void err(final String aMessage) {
-		final long time = System.currentTimeMillis();
-		entries.add(new LogEntry(time, LogEntry.Level.ERROR, aMessage));
-		if (verbose == Verbosity.VERBOSE)
-			System.err.println(aMessage);
+		final long     time     = System.currentTimeMillis();
+		final LogEntry logEntry = new LogEntry(time, LogEntry.Level.ERROR, aMessage);
+		addEntry(logEntry);
+
+		behaviorErr(verbose, logEntry, time, aMessage);
+	}
+
+	public void addEntry(final LogEntry logEntry) {
+		entries.add(logEntry);
 	}
 
 	public void info(final String aMessage) {
-		final long time = System.currentTimeMillis();
-		entries.add(new LogEntry(time, LogEntry.Level.INFO, aMessage));
-		if (verbose == Verbosity.VERBOSE)
-			System.out.println(aMessage);
+		final long     time     = System.currentTimeMillis();
+		final LogEntry logEntry = new LogEntry(time, LogEntry.Level.INFO, aMessage);
+		addEntry(logEntry);
+		behaviorInfo(verbose, logEntry, time, aMessage);
 	}
 
-	public String getFileName() {
-		return fileName;
+	public void behaviorErr(final Verbosity aVerbosity,
+													final LogEntry aLogEntry,
+													final long aTime,
+													final String aMessage) {
+		if (aVerbosity == Verbosity.VERBOSE) {
+			System.err.println(aMessage);
+		}
+	}
+
+	public void behaviorInfo(final Verbosity aVerbosity,
+													 final LogEntry aLogEntry,
+													 final long aTime,
+													 final String aMessage) {
+		if (aVerbosity == Verbosity.VERBOSE) {
+			System.out.println(aMessage);
+		}
 	}
 
 	public List<LogEntry> getEntries() {
 		return entries;
 	}
 
+	public String getFileName() {
+		return fileName;
+	}
+
 	public String getPhase() {
 		return phase;
+	}
+
+	public Verbosity getVerbose() {
+		return verbose;
 	}
 }
 
