@@ -90,40 +90,39 @@
     </dependencies>
 
     <repositories>
+        <!--
         <repository>
             <id>central</id>
             <url>https://repo1.maven.org/maven2/</url>
         </repository>
+        -->
         <repository>
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
-<!--
         <repository>
-            <id>maven_central</id>
-            <name>Maven Central</name>
-            <url>https://repo.maven.apache.org/maven2/</url>
+            <id>clojars</id>
+            <url>https://repo.clojars.org</url>
         </repository>
--->
     </repositories>
 
     <properties>
         <project.build.outputTimestamp>1</project.build.outputTimestamp>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <downloadSources>true</downloadSources>
 
         <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-        <downloadSources>true</downloadSources>
 
         <jacoco.version>0.8.9</jacoco.version>
         <guava.version>33.3.1-jre</guava.version>
 
+        <!--
         <buffers.version>0.0.3</buffers.version>
         <range.version>0.0.3b</range.version>
-
         <jdeferred.version>2.0.0</jdeferred.version>
+        -->
 
         <!-- for edu 2022.2 -->
         <!-- <kotlin.version>1.7.10</kotlin.version> -->
