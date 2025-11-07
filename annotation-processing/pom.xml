@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>annotation-processing</artifactId>
 	<name>annotation-processing</name>
-	<version>automatic-anno.2025-02</version>
+	<version>automatic-anno.2025-11</version>
 
 	<parent>
 		<groupId>tripleo.elijah</groupId>
-		<version>automatic-anno.2025-02</version>
+		<version>automatic-anno.2025-11</version>
 		<artifactId>automatic-anno</artifactId>
 	</parent>
 
@@ -47,8 +47,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
+					<source>17</source>
+					<target>17</target>
 				</configuration>
 			</plugin>
 		</plugins>

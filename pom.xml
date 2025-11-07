@@ -5,7 +5,7 @@
     <groupId>tripleo.elijah</groupId>
     <artifactId>automatic-anno</artifactId>
     <packaging>pom</packaging>
-    <version>automatic-anno.2025-02</version>
+    <version>automatic-anno.2025-11</version>
 
     <!-- TODO 12/31 naming here -->
     <name>eljc-almost-automatic-anno</name>
@@ -100,10 +100,12 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+<!--
         <repository>
             <id>clojars</id>
             <url>https://repo.clojars.org</url>
         </repository>
+-->
     </repositories>
 
     <properties>
