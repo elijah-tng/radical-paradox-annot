@@ -10,7 +10,7 @@
 		<version>automatic-anno.2025-11</version>
 	</parent>
 
-	<artifactId>annotations</artifactId>
+	<artifactId>annotations-mustache</artifactId>
 	<name>annotations</name>
 	<description>annotations</description>
 	<packaging>jar</packaging>
