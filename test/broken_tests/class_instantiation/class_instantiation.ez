@@ -1,9 +1,0 @@
-program class_instantiation
-
-lib
-	"."
-
-generate
-
-end
-

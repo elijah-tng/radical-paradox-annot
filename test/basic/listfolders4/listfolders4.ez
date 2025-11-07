@@ -1,9 +1,0 @@
-program listfolders4
-
-lib
-    ".."
-
-generate 
-    lang: "c"
-
-end

@@ -1,4 +1,4 @@
-name: Java CI with Maven
+name: Java CI (annot) with Maven
 
 on:
   workflow_dispatch:

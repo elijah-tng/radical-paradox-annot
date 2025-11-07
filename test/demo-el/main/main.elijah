@@ -1,6 +1,0 @@
-// pk _ // !!
-
-class Main < wprust.demo.fact.FactDemo { }
-
-// elcc (or elijahc) . -o fact
-// eljc (to java) . -o fact[.jar]
