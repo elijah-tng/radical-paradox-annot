@@ -44,11 +44,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
-@SupportedAnnotationTypes("com.cloudogu.blog.JsonObject")
+@SupportedSourceVersion(SourceVersion.RELEASE_17)
+@SupportedAnnotationTypes("tripleo.elijah.automatic_anno.mustache.JsonObject")
 public class ToJsonProcessor extends AbstractProcessor {
 
-	private static final String TEMPLATE = "com/cloudogu/blog/jsonwriter.mustache";
+	private static final String TEMPLATE = "tripleo/elijah/automatic_anno/mustache/jsonwriter.mustache";
 
 	private final Mustache template;
 
