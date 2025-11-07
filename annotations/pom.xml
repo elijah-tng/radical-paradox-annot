@@ -7,14 +7,14 @@
 	<parent>
 		<groupId>tripleo.elijah</groupId>
 		<artifactId>automatic-anno</artifactId>
-		<version>automatic-anno.2025-02</version>
+		<version>automatic-anno.2025-11</version>
 	</parent>
 
 	<artifactId>annotations</artifactId>
 	<name>annotations</name>
 	<description>annotations</description>
 	<packaging>jar</packaging>
-	<version>automatic-anno.2025-02</version>
+	<version>automatic-anno.2025-11</version>
 
 	<properties>
 		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>

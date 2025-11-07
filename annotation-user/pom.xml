@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>annotation-user</artifactId>
     <name>annotation-user</name>
-    <version>automatic-anno.2025-02</version>
+    <version>automatic-anno.2025-11</version>
 
     <parent>
         <groupId>tripleo.elijah</groupId>
-        <version>automatic-anno.2025-02</version>
+        <version>automatic-anno.2025-11</version>
         <artifactId>automatic-anno</artifactId>
     </parent>
 
@@ -17,7 +17,7 @@
         <dependency>
             <groupId>tripleo.elijah</groupId>
             <artifactId>annotation-processing</artifactId>
-            <version>automatic-anno.2025-02</version>
+            <version>automatic-anno.2025-11</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

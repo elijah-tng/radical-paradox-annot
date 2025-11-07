@@ -1,5 +1,7 @@
 package tripleo.elijah.automatic_anno.roaster;
 
+import tripleo.elijah.automatic_anno.BuilderProperty;
+
 public class Person {
 
     private int age;

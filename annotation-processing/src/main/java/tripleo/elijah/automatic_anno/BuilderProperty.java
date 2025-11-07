@@ -1,4 +1,4 @@
-package tripleo.elijah.automatic_anno.roaster;
+package tripleo.elijah.automatic_anno;
 
 import java.lang.annotation.*;
 
