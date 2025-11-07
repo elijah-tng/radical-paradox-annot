@@ -15,7 +15,7 @@
     <modules>
         <module>annotation-processing</module>
         <module>annotation-user</module>
-        <module>annotations</module>
+        <module>annotations-mustache</module>
     </modules>
 
     <dependencies>
