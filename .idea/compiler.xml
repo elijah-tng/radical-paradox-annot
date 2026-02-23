@@ -21,7 +21,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="annotations-mustache" options="-proc:none" />
+      <module name="annotation-mustache" options="-proc:none" />
     </option>
   </component>
 </project>
